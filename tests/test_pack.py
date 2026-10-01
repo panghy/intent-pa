@@ -159,6 +159,51 @@ class PackTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "review upstream"):
             function("fn renamed() {}", "parse_frontmatter")
 
+    def test_private_store_contract_survives_specialists_only_install(self):
+        # Installation has no source/docs includes: inspect the actual shipped bodies.
+        required = (
+            "dedicated private operational store",
+            "Steward is the single integration owner",
+            "Persist a handoff before notifying its recipient",
+            "expected base and record versions",
+            "acknowledge only after reading and validating",
+            "Never use last-writer-wins for authority or conflicting facts",
+            "confirm the remote ref before calling a checkpoint synced",
+            "Git restore never authorizes replay",
+            "No routine user review of branches, commits or PRs",
+            "Actual tool restrictions and higher-priority rules still apply",
+        )
+        for path in sorted((self.root / "specialists").glob("*.md")):
+            _, body = parse_generated(path.read_text())
+            for obligation in required:
+                with self.subTest(role=path.stem, obligation=obligation):
+                    self.assertIn(obligation, body)
+            self.assertNotIn("No credentials or personal records in a Git repository", body)
+
+    def test_git_contract_removal_from_any_installed_role_is_detected(self):
+        for path in sorted((self.root / "specialists").glob("*.md")):
+            with self.subTest(role=path.stem):
+                original = path.read_text()
+                start = original.index("### Internal Git collaboration")
+                end = original.index("### Recovery and cleanup", start)
+                path.write_text(original[:start] + original[end:])
+                with self.assertRaisesRegex(ValueError, path.name):
+                    validate(self.root)
+                path.write_text(original)
+
+    def test_store_owners_are_installed_with_their_specific_responsibilities(self):
+        owners = {
+            "pa-ada": "substantive personal decisions",
+            "pa-keeper": "field authority and record versions",
+            "pa-steward": "restore verification",
+            "pa-auditor": "consequential record and schema changes",
+        }
+        for role, responsibility in owners.items():
+            _, body = parse_generated((self.root / "specialists" / (role + ".md")).read_text())
+            role_body = body.split("# " + role[3:].capitalize() + " —", 1)[1]
+            with self.subTest(role=role):
+                self.assertIn(responsibility, role_body)
+
     def test_approved_messaging_rules_reach_every_prompt(self):
         obligations = (
             "approximately 30-second passive progress/delivery watchdog",
@@ -170,7 +215,7 @@ class PackTests(unittest.TestCase):
             "Never erase user/vendor messages",
             "Renew still-authorized schedules before hook expiration",
             "Silence is never approval",
-            "No credentials or personal records in a Git repository",
+            "Never store secrets or raw account exports in Git",
             "success, failure and cancellation paths",
         )
         for filename, content in render(self.root).items():

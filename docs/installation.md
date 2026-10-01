@@ -42,8 +42,10 @@ the supported authenticated transport. Never use `--insecure` for this deploymen
 Do not inherit an `INTENTD_INSECURE` development setting. Data/config paths alone
 do **not** isolate home-directory specialist overrides, credentials or environment
 variables. A separate OS account/container and scoped credentials provide those
-boundaries. Disable workspace auto-commit for personal runtime work; never put
-private notes, SQLite ledgers or account exports into the pack's Git history.
+boundaries. Disable blanket workspace auto-commit of private runtime artifacts.
+Keep private notes, ledgers and account exports out of the pack's Git history.
+The separate operational store may contain selected minimized records and consistent
+redacted checkpoints under the rules below; never live databases or secrets.
 
 `INTENTD_SPECIALISTS_DIR` is the environment alternative to the launch flag. The
 flag takes precedence. This replaces the whole base tier, including the bundled
@@ -100,6 +102,35 @@ Keep a compact principal profile, current-task/watch index and canonical entity
 records with provenance and review dates. Store secrets only in the supported
 credential service. Do not ask the user to paste passwords or authentication codes
 into a note or conversation. Each worker gets only the context needed for its task.
+
+## Select the private operational store
+
+Ask for a destination only when it is missing. The principal can name a dedicated
+private GitHub repository; selection permits the team's minimized operational
+records there, not a bulk migration of old history. Keep three separate locations:
+the pack checkout (instructions), private runtime storage (live transactional
+ledgers and credentials via the credential service), and the operational store
+(curated facts, provenance, handoffs and consistent checkpoint exports).
+
+Steward verifies repository identity, private visibility, authenticated access,
+collaborators and branch restrictions before transferring anything. No store is
+created or populated by installing this pack. If access or privacy cannot be
+verified, retain local pending work and ask only for the necessary setup fix;
+never fall back to a public repository or this pack's repository.
+
+Routine commits, branches, internal reviews and synchronization are delegated to
+the team. Inspect actual Git capabilities, file/root scoping and inherited rules
+in a fresh session. The charter cannot bypass an enforced approval. Resolve
+conflicting development rules during dedicated-store setup, not by repeatedly
+asking the user to approve operational PRs. Substantive bookings, spending and
+messages retain their original authority requirements.
+
+Before promising backup, establish the consistency/export mechanism, one integration
+owner, bounded checkpoint/retry schedule and an isolated restore check. Follow
+[the record map, handoff and recovery procedure](operations.md#internal-records-handoffs-and-private-checkpoints).
+Git checkpoints do not install a runtime ledger or sync service. Explain retention
+limits up front: deleting current files does not erase history, clones or provider
+backups; private visibility is not encryption. Keep secrets and raw exports out.
 
 ## Discover messaging capabilities
 

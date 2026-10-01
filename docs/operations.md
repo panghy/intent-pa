@@ -5,6 +5,195 @@ resource registry. Store IDs and compact facts with provenance; keep credentials
 in the credential service and original documents in their authoritative systems.
 Ada owns user replies; workers return evidence and cleanup status to Ada.
 
+## Internal records, handoffs and private checkpoints
+
+This is a team operating procedure, not a shipped Git service. The installed
+charter contains the essential rules; the details here guide setup and review.
+No executable Git workflow or automatic checkpoint scheduler is installed.
+
+### Destination and authority
+
+The principal selects a dedicated private operational repository; never assume
+this pack's repository is that destination. Steward records its stable repository
+identity, owner, URL, intended integration branch and last privacy/access check.
+Before the first upload, after reconnect and before each push, check those against
+the authenticated account and current remote metadata, including collaborator
+access and applicable branch restrictions. A renamed/transferred repository or
+changed audience needs reconciliation, not blind trust in a familiar URL.
+
+Store selection authorizes minimized task records, personal facts and redacted
+checkpoints needed for the service. It does not authorize bulk account exports,
+uploading pre-existing history or disclosure to extra collaborators. Never store
+credentials, access tokens, payment secrets, raw sensitive archives or full
+transcripts in tracked files, Git metadata or logs. Use opaque task IDs in branch
+names and commit messages. Private hosting is access control, not encryption or
+proof that every copy is erasable. Review content and metadata before staging;
+ignore rules and automated secret scans are useful but not a privacy boundary.
+
+Use the actual installed Intent Git helpers for attributed, explicitly scoped
+commits where available; inspect their supported arguments and repository root
+selection first. Read history/diffs with available read-only Git tools for
+provenance. Use only supported interfaces for branches, worktrees and remotes.
+No method name in this procedure implies an API exists. If the available commit
+helper cannot scope the intended root/files, stop that write and resolve setup.
+Never bypass an enforced approval or disable policy to satisfy this pack.
+
+Routine internal review and synchronization belong to agents. PRs are optional
+coordination, not a routine user chore. If inherited development merge rules or
+branch protection prevent autonomous store integration, preserve local work and
+have Ada explain the required access/configuration change. Do not repeatedly ask
+the principal to approve operational diffs. Pack development remains subject to
+its own review and human merge rules.
+
+### Record map and field authority
+
+Keeper maintains one manifest mapping stable task and note IDs to record IDs,
+canonical locations, owners and original sources. Notes remain searchable working
+records with pointers and last-seen versions. Changes in notes are proposals to
+the canonical owner until accepted; a stale note cannot overwrite current state.
+The hierarchy in the charter determines retrieval order, not permission precedence.
+
+| Information | Canonical authority | Store representation |
+| --- | --- | --- |
+| Profile and curated entity facts | Integrated records maintained by Keeper; authenticated corrections supersede earlier facts | Compact profile, entity IDs, source pointers and conflicting observations |
+| Principal intent and action authority | Current authenticated request and durable authority ledger, checked for expiry/revocation | Authority index and versioned references; never a reusable approval token |
+| Task status, action attempts and unknown outcomes | Current durable runtime task/action ledger | Consistent minimized checkpoint with generation/source versions |
+| Outbox, handoff acknowledgements, watches and resources | Respective durable runtime ledgers with one accountable owner | Indexes and recovery checkpoints, not live writable replicas |
+| Whether an external action occurred | Current authoritative provider record | Receipt/reference plus observed time and reconciliation status |
+| Decisions, verified outcomes and archive | Append-only event records and linked evidence; corrections supersede events | Event IDs, concise closed-task summaries, unresolved obligations |
+
+Each record needs `id`, `schema_version`, `version`, `owner`, `task_id`,
+`authority_ref`, source references and observation time, fact/inference status,
+sensitivity and review/expiry (explicitly not-applicable where appropriate).
+Each fact retains its own provenance; rewriting a summary must not manufacture a
+new observation date. Decision/outcome events include actor, task/action version,
+evidence and any superseded event ID. Append-only is the normal audit policy,
+subject to authorized retention/deletion; it is not a claim of immutable truth.
+Keeper reviews schema migrations; Auditor checks consequential changes before
+Steward integrates them. Unknown schemas are quarantined for review, not guessed.
+
+A checkpoint manifest includes schema version, generation ID, capture time,
+source ledger versions/watermarks, included record IDs and content checksums,
+exclusions, pending obligations and a reference to the current retention policy.
+Export a transactionally consistent snapshot from runtime storage through its
+supported export/backup mechanism; never copy a live SQLite file into Git. If
+consistency cannot be established, retain work locally and label backup incomplete.
+A checkpoint may omit protected data intentionally: say exactly what is restorable.
+Restoring indexes cannot reconstruct excluded documents or credential services.
+
+### Worker handoff and integration
+
+Ada assigns the task/version, bounded authority and success condition. A worker
+starts from the recorded integrated base and record versions. Parallel workers
+use separate scoped worktrees/branches when supported; otherwise Steward
+serializes editing and attributed commits in the shared checkout. Never switch
+its branch under another worker. Keep branch/worktree ownership in the resource
+registry. Each change names its task and modifies only that task's records.
+
+Persist the handoff in the durable inbox before any event notification. Include
+handoff ID/version, task/version, sender and intended recipient, base checkpoint,
+affected record IDs and expected versions, proposed changes and evidence, result,
+unfinished obligations, next owner/action/check time and cleanup status. Link the
+private change summary and checkpoint where available; absent integration/backup
+is an explicit pending state, not a reason to lose an otherwise useful handoff.
+
+The recipient re-reads the durable record, validates schema, sender/scope, task
+and authority freshness, base and record versions, and acknowledges the exact
+handoff ID/version after reading it. Record accepted, needs-correction or blocked
+with a reason and next owner. Acknowledged means received and checked, not merged,
+externally executed or delivered to the user. Duplicate wakes look up that same
+acknowledgement. Superseded versions cannot regain authority. Rejection retains
+the original and pending correction obligation; silence leaves it pending.
+
+Steward serializes integration, fetching the current base and reviewing semantic
+changes before applying them. Recheck affected versions immediately before
+integration, even after an internal review. Non-overlapping changes can proceed;
+conflicting facts or authority require owner reconciliation and, if necessary,
+Auditor review. Ada asks the principal only about unresolved personal intent.
+Record the resolution with both sources. Never silently choose the latest
+written value, even when Git reports no textual conflict. Internal approval of a
+record has no effect on external action permission.
+
+### Checkpoints, outages and restore
+
+Steward checkpoints at accepted handoffs, verified outcomes, material memory
+changes and graceful shutdown. During active dirty work, record a next checkpoint
+deadline (default five minutes); coalesce it with the existing maintenance watch.
+Persist the due work outside hook state, renew the watch and reconcile overdue
+work on startup. A scheduling failure is a coverage gap, not successful backup.
+The pack does not install that export/maintenance loop.
+
+Validate schema, privacy and consistency, stage only the intended files, integrate,
+then push only to the verified destination. After a push or uncertain response,
+read the remote ref and confirm it contains the intended checkpoint and manifest.
+Record the verified checkpoint, coverage, last successful time, and outstanding
+local generations. A local commit, queued push or clean worktree is not remote
+backup evidence. Fetch and reconcile remote divergence; never force-push, discard
+local edits or overwrite remote work to make a status indicator green.
+
+On a known transient failure, retain a durable sync obligation and retry after
+one, five and fifteen minutes, then pause and notify Ada of the outage. Record
+attempts/deadlines; after exhaustion wait for a meaningful recovery/access change
+rather than loop. Missing destinations, unverified privacy or denied access stop
+uploads immediately until corrected. Continue safe local work when its durable
+storage is available; otherwise report the capability gap. Never create a public
+fallback, upload to the pack repo or claim local work is remotely backed up.
+
+Remote synchronization and independently restorable backup are different claims.
+At first setup, after schema/storage changes and periodically (default monthly),
+Steward restores a retained checkpoint into isolated private storage with outbound
+actions disabled. Validate schema, manifest/checksums, source versions, reference
+integrity, coverage and current retention exclusions; record time, result and
+missing dependencies. Do not overwrite live state during a drill. A remote-only
+copy shares account/deletion risks; an independent backup destination needs its
+own authorized privacy, retention and restore checks before being called a backup.
+
+After a real restore, preserve any newer local work. Compare the restored state
+with current principal instructions and forgetting records, then read provider
+state for unknown writes and pending sends, revalidate authority, reconcile
+handoffs and renew still-authorized schedules. Git history is neither a lease nor
+proof a payment/message did not happen. Unknown or unrecoverable state stays
+paused for reconciliation; never replay old approvals or sends. Restore does
+not rewind external reality. Only then resume eligible work and separately
+reconcile Ada's final-reply obligation.
+
+Remove owned temporary exports and worktrees only after verified integration,
+required checkpoint coverage and settled handoff/action/delivery obligations.
+Retain unmerged or unpushed work with an owner and next action, even after a task
+is cancelled. Never remove another worker's/user's resources as cleanup.
+
+### Worked recovery examples
+
+These are walkthroughs for reviewers, not executed Git or multi-agent tests.
+
+| Situation | Required handling | User-facing result if needed |
+| --- | --- | --- |
+| Two workers edit entity E7 from version 4; one corrects a phone number, another adds a preferred appointment time | Integrate the verified phone correction as version 5; re-read/review the time proposal against version 5 before version 6. Preserve both provenance entries. If both changed the same preference, retain both sources and ask Ada to resolve meaning rather than accept a clean textual merge. | “Do you prefer morning or afternoon appointments now?” only if current sources cannot resolve intent. |
+| Handoff H9 lacks evidence or expects a superseded task/authority version | Record needs-correction for H9's exact version; keep its pending obligation, return the reason to its owner and request a new validated version. No integration or external action follows stale authority. | Usually none; Ada asks only if the personal decision is still missing. |
+| Remote is missing, inaccessible or its private status cannot be verified | Preserve local records and pending sync. Stop uploads until destination/privacy/access is verified; bounded retry only for transient failures. | “Your work is saved locally, but I cannot update your private backup. Please reconnect access.” Do not say saved locally unless confirmed. |
+| Crash after persisting a handoff, before notification/acknowledgement | On restart scan pending inbox and acknowledgements by ID/version, notify again if needed, and let recipient deduplicate. A committed record alone is not acknowledgement. | None unless the outage affects the requested outcome. |
+| Remote advanced or a push timed out | Fetch/read remote history, locate the intended checkpoint, then reconcile other edits. Confirm coverage or retain a pending push; no force-push or duplicate checkpoint claim. | “Your latest changes are still waiting to be backed up.” |
+| Restore contains an old approval and a send marked pending | Validate against current authority and provider state before any send; reconcile existing message IDs and leave unknown outcomes paused. Keep any forgotten facts excluded. | State the unresolved personal outcome, not the restored revision. |
+
+### Retention and forgetting
+
+Keeper tracks retention by record, source and derived copy; Steward applies it to
+checkpoints, clones, caches and restore procedures. Stop new use, indexing, sync
+and pending watches in scope immediately. Remove authorized current copies and
+keep a minimal opaque deletion marker under the retention policy so a later
+restore cannot silently resurrect the fact. Do not put the forgotten value in
+that marker. Resolve expired deletion markers against retained old backups before
+removing the markers themselves.
+
+Deleting a file or reverting a commit leaves historical copies. History rewriting
+is a separate coordinated privacy operation with explicit authority and verified
+scope, not routine sync cleanup; this workflow never force-pushes. Inventory remote
+history, collaborators' clones, provider retention and independent backups and
+report what cannot be verified or erased. Disconnecting access is not deletion.
+For a leaked secret, stop propagation, use the supported revocation/rotation flow,
+and involve the appropriate owner; removing text does not revoke a credential.
+
+
 ## Passive progress and delivery watchdog
 
 [`examples/watchdog.mjs`](../examples/watchdog.mjs) exports a concrete
