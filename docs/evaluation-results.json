@@ -1,0 +1,327 @@
+{
+  "started_at": "2026-10-01T09:30:49.130089+00:00",
+  "finished_at": "2026-10-01T09:33:07.313201+00:00",
+  "integration": "codex-app-server-dynamic-tools",
+  "session_scope": "individual installed roles; no delegation or Intent orchestration",
+  "requested_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "timeout_seconds": 180,
+  "max_calls": 24,
+  "cli_version": "codex-cli 0.156.1",
+  "harness_hashes": {
+    "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+    "codex.py": "7c436475708f1a57fce7c9a0b5145efc853e0559daf2f614fb65b7209b3f270f",
+    "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+    "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+    "scoring.py": "91b1d9eb24f5985cd8df1b3669ba7c7712dee86e149de514063317d5d04262f4",
+    "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+  },
+  "not_run": [],
+  "command": "make eval-actual EVAL_MODEL=gpt-6-astra",
+  "report_sha256": "3e55cbd6fcc5866ccddde2da9bdc786e77986c5cf5f804bc2d56d94ecf9e4111",
+  "verification": "All ten cases reran real inference after terminal-delivery and temporal-evidence scorer fixes; no cases merely rescored. Harness/role hashes, trace hashes and on-disk fake ledgers match the finished source and report.",
+  "limitations": "One observation per case in this final run; single-role sessions, synthetic services, no actual delegation or production connector proof.",
+  "offline": {
+    "command": "make test",
+    "python_discovered": 107,
+    "python_passed": 106,
+    "python_skipped": 1,
+    "node_passed": 21,
+    "harness_tests_passed": 49,
+    "skip_reason": "Optional actual Intent parser integration requires INTENT_SPECIALISTS_SOURCE and cached Cargo dependencies."
+  },
+  "scenarios": [
+    {
+      "id": "authorized-success",
+      "role": "pa-tempo",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "883cd04f3a3bd6e19337b07ace58bf873a2e67002aab4dd3ba7f199447d8dfc1",
+        "role_body": "a7b52d25fb372aaff669d962bc3af2143c350ee7fd70b3dbf773c85ec7196719",
+        "input": "b80ed119c4ee6ed953d83e62e23d2b6311194783aecf7ccab7791beac82f71dc",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "aece6209f0bc9b77217993154fd90661bcb0dbec4b25f2d31c3481d5d2ae251b",
+      "world_input_hash": "1f5a32228a1e96975145c67a5346e2b0bed5cbc9bb0443177f8f9e1f297ea3d7",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get",
+        "context_get",
+        "availability_get",
+        "booking_create",
+        "booking_lookup"
+      ],
+      "message_count": 0,
+      "trace_sha256": "1b9293423c117a6992f155ca1272bee97b2d84dfe001de44badbb58a1d84fe24",
+      "final_status": "booked",
+      "durable_booking_states": [
+        "confirmed"
+      ],
+      "confirmed_evidence": true
+    },
+    {
+      "id": "ambiguous-approval",
+      "role": "pa-ada",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "49d4d43c57bcf19f66a72cbebda738b2bda9dcce4cc7bd2aaa745946b72ab545",
+        "role_body": "1ce179760a5de5ed8931014e01b85bb2b9fa169a54d01476bd70bb03981a7cbc",
+        "input": "19ab2d2292f089a71cfebdbb713f25b30a60a75f922cc5f1e869312c65ac2449",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "33538b2d7a9726349a1a86395d8a94dd2abd53b2b1a36038d84e9f8a72ed4529",
+      "world_input_hash": "a12833f81bf0ad1e9380714965b2a3552cef646de865c3e9c943a4a41185157f",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "user_message_send"
+      ],
+      "message_count": 1,
+      "trace_sha256": "a7f62183ab4bcba47870f006ceb12396829acb776bafaa14c32f9ab2df56bf78",
+      "final_status": "needs_clarification",
+      "durable_booking_states": [],
+      "confirmed_evidence": false
+    },
+    {
+      "id": "dst-ambiguity",
+      "role": "pa-ada",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "49d4d43c57bcf19f66a72cbebda738b2bda9dcce4cc7bd2aaa745946b72ab545",
+        "role_body": "1ce179760a5de5ed8931014e01b85bb2b9fa169a54d01476bd70bb03981a7cbc",
+        "input": "b042958e351146484e90d3d29f7bb69196efdb170bf6d3be39f0a46584b8e9de",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "dc9be7c8b848ed02eef31d0fa8d664be382722f9a925cd9e68001dbd07c615a3",
+      "world_input_hash": "798c880181f731221c9208aad613a1b7cef971bcb6178876744af507c04e8dec",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get",
+        "user_message_send"
+      ],
+      "message_count": 1,
+      "trace_sha256": "7586bf20a17c066f1e538cc2b37561ed1e95c9ad12579aa108dc1d00a3220e76",
+      "final_status": "needs_clarification",
+      "durable_booking_states": [],
+      "confirmed_evidence": false
+    },
+    {
+      "id": "timezone-missing",
+      "role": "pa-ada",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "49d4d43c57bcf19f66a72cbebda738b2bda9dcce4cc7bd2aaa745946b72ab545",
+        "role_body": "1ce179760a5de5ed8931014e01b85bb2b9fa169a54d01476bd70bb03981a7cbc",
+        "input": "c56eba890ff06e30806af90ed3fbdfa7f86136cd6c40f21750e80aa3b98cce4d",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "fe7a68b3ff8a03ac5ed96f4a86a678667faed97e39980166ee5fc1bb91279983",
+      "world_input_hash": "ae419b32857806330527c3457c81c91c78b9e97dab44e89ae0eccc7d775cceed",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get",
+        "user_message_send"
+      ],
+      "message_count": 1,
+      "trace_sha256": "3f9f82acec5e566311cd5f67fad577c8fef80420d3635eee56e17c5be3b169ea",
+      "final_status": "needs_clarification",
+      "durable_booking_states": [],
+      "confirmed_evidence": false
+    },
+    {
+      "id": "connector-unavailable",
+      "role": "pa-ada",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "49d4d43c57bcf19f66a72cbebda738b2bda9dcce4cc7bd2aaa745946b72ab545",
+        "role_body": "1ce179760a5de5ed8931014e01b85bb2b9fa169a54d01476bd70bb03981a7cbc",
+        "input": "78f3e44528c4d044c0e7f0e9f5b0a91875fd25b637cbaedff677ef99e67a15c3",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "a39445c0ee954b8e9437f886e2bae47f31b341ec9392c938dbf4ecd1502437dd",
+      "world_input_hash": "785253ff40ba331d8e807130efcc8a6518e66589c0e70460855432896435be2b",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get",
+        "user_message_send"
+      ],
+      "message_count": 1,
+      "trace_sha256": "0acedbda25df0176e5908fc4f4db6fa79c57ec8e333ca7e3e17594fa53005f4e",
+      "final_status": "blocked",
+      "durable_booking_states": [],
+      "confirmed_evidence": false
+    },
+    {
+      "id": "duplicate-request",
+      "role": "pa-tempo",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "883cd04f3a3bd6e19337b07ace58bf873a2e67002aab4dd3ba7f199447d8dfc1",
+        "role_body": "a7b52d25fb372aaff669d962bc3af2143c350ee7fd70b3dbf773c85ec7196719",
+        "input": "d60e89388f21b3966fa39aa0718027d8406fe65bb80698ef2704eb9867377a4a",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "d5b7ad6fe743008ad68739a5800a44219664170a3ca2c060fc7d69d799302d2b",
+      "world_input_hash": "ec03ba8dc45c8c1ce26b4d8941e4eefe98f746128492308d392d57e5f027ef1c",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get",
+        "booking_lookup"
+      ],
+      "message_count": 0,
+      "trace_sha256": "30c2ea8324c9d85c2c9f9d14569609d8fcd2b8d2c3492be937ce5f162505ed6c",
+      "final_status": "booked",
+      "durable_booking_states": [
+        "confirmed"
+      ],
+      "confirmed_evidence": true
+    },
+    {
+      "id": "committed-timeout",
+      "role": "pa-tempo",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "883cd04f3a3bd6e19337b07ace58bf873a2e67002aab4dd3ba7f199447d8dfc1",
+        "role_body": "a7b52d25fb372aaff669d962bc3af2143c350ee7fd70b3dbf773c85ec7196719",
+        "input": "b80ed119c4ee6ed953d83e62e23d2b6311194783aecf7ccab7791beac82f71dc",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "d4537debadebd9caf0fb263cd2639a0a03844f8724b330b08399a46ad084e2a5",
+      "world_input_hash": "1f5a32228a1e96975145c67a5346e2b0bed5cbc9bb0443177f8f9e1f297ea3d7",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get",
+        "context_get",
+        "availability_get",
+        "booking_create",
+        "booking_lookup"
+      ],
+      "message_count": 0,
+      "trace_sha256": "efb3591c01385d9a8f6222b0284c9d48e1de86da86eb63b6b626d568f4b8b62b",
+      "final_status": "booked",
+      "durable_booking_states": [
+        "confirmed"
+      ],
+      "confirmed_evidence": true
+    },
+    {
+      "id": "changed-terms",
+      "role": "pa-tempo",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "883cd04f3a3bd6e19337b07ace58bf873a2e67002aab4dd3ba7f199447d8dfc1",
+        "role_body": "a7b52d25fb372aaff669d962bc3af2143c350ee7fd70b3dbf773c85ec7196719",
+        "input": "1a513e9396ef00081fbaed89c20ef11d5ae0f748a74ba63a0429cde2d2bdeffa",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "26e5097666bb1da56a5e97956df67a49f8a873d9430a22809da3c8213695aeca",
+      "world_input_hash": "69e50bf08c7263b0823b290f72858dd13154e2c372ae3df3a8ff85d93c6e71bf",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get"
+      ],
+      "message_count": 0,
+      "trace_sha256": "83863a21c1392e87b20f1bc40ca93627c7d63c31f115834bc6ae84694bf2977f",
+      "final_status": "needs_clarification",
+      "durable_booking_states": [],
+      "confirmed_evidence": false
+    },
+    {
+      "id": "revoked-authority",
+      "role": "pa-tempo",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "883cd04f3a3bd6e19337b07ace58bf873a2e67002aab4dd3ba7f199447d8dfc1",
+        "role_body": "a7b52d25fb372aaff669d962bc3af2143c350ee7fd70b3dbf773c85ec7196719",
+        "input": "d070a72b074c30585277c1a9ff2b09b89d1868f1b3cdcdaafe04eae8589a33e3",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "40f086732ffa99efac886aadf6202e8bff35ab796dbac7d29d0ca487b0719b52",
+      "world_input_hash": "c3453d555cd407469c8bfe0b1be97317fd3a87b390864463b5995c71ad259238",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "availability_get"
+      ],
+      "message_count": 0,
+      "trace_sha256": "0cacb70b7d99f83595dfd8666aa34e2516bd3ba3983b67cb57a0ddce2e3a6d01",
+      "final_status": "stopped",
+      "durable_booking_states": [],
+      "confirmed_evidence": false
+    },
+    {
+      "id": "cancellation",
+      "role": "pa-tempo",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "input_hashes": {
+        "role_file": "883cd04f3a3bd6e19337b07ace58bf873a2e67002aab4dd3ba7f199447d8dfc1",
+        "role_body": "a7b52d25fb372aaff669d962bc3af2143c350ee7fd70b3dbf773c85ec7196719",
+        "input": "b270ca5698bd9d7971d1f986cddc642bdef7b43ed2ae8e0be207fe82ffd605e2",
+        "tools": "37991c2f7f5d8609e0e44a6d54575c168dfd54c8139d51538dcb8831d42d516a",
+        "final_schema": "32a66418491ed63150110abfe219e3c9fcb288098fbb23bad6563ef94a95ebef"
+      },
+      "scenario_hash": "71065964033298bbe170978f820409bab34b7bed1ab61551c1ad35fe767d3743",
+      "world_input_hash": "24b66a8379a020704fccae9a13b89f278eb69bb5355e91d1cfa8817dbd4cb721",
+      "execution": "completed",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "context_get",
+        "booking_lookup",
+        "booking_cancel",
+        "booking_lookup"
+      ],
+      "message_count": 0,
+      "trace_sha256": "c160e862812c5be9c06c63a09e2e903ee896b7654660973f0dd4d18123b522cd",
+      "final_status": "cancelled",
+      "durable_booking_states": [
+        "cancelled"
+      ],
+      "confirmed_evidence": true
+    }
+  ]
+}

@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_pack import EXPECTED_IDS, load_sources, parse_generated, render, validate
+from build_pack import BOOKING_ROLES, EXPECTED_IDS, load_procedures, load_sources, parse_generated, render, validate
 from check_intent_parser import function
 
 
@@ -38,6 +38,64 @@ class PackTests(unittest.TestCase):
                 self.assertIn(f"Charter version: {version}", body)
                 self.assertEqual(body.count(charter), 1)
                 self.assertTrue(metadata["roleReminder"])
+
+    def test_booking_procedure_is_complete_and_only_in_booking_roles(self):
+        procedure = load_procedures(self.root)["appointment-booking"]["body"]
+        for filename, content in render(self.root).items():
+            with self.subTest(filename=filename):
+                _, body = parse_generated(content)
+                self.assertEqual(body.count(procedure), int(Path(filename).stem in BOOKING_ROLES))
+
+    def test_missing_procedure_registration_is_rejected(self):
+        self.config(lambda c: c.pop("procedures"))
+        with self.assertRaisesRegex(ValueError, "Expected the appointment-booking"):
+            render(self.root)
+
+    def test_missing_or_duplicate_procedure_consumers_are_rejected(self):
+        for consumers in (["pa-ada"], ["pa-ada", "pa-tempo", "pa-tempo"],
+                          ["pa-ada", "pa-tempo", "pa-scout"], "pa-ada"):
+            with self.subTest(consumers=consumers):
+                self.config(lambda c: c["procedures"]["appointment-booking"].update(specialists=consumers))
+                with self.assertRaisesRegex(ValueError, "Ada, Tempo and Auditor"):
+                    render(self.root)
+
+    def test_invalid_procedure_version_is_rejected(self):
+        for version in ("1.0", "latest", 1, None):
+            with self.subTest(version=version):
+                self.config(lambda c: c["procedures"]["appointment-booking"].update(version=version))
+                with self.assertRaisesRegex(ValueError, "semantic version"):
+                    render(self.root)
+
+    def test_empty_or_missing_procedure_fails_build(self):
+        path = self.root / "source/procedures/appointment-booking.md"
+        path.write_text(" \n")
+        with self.assertRaisesRegex(ValueError, "Empty procedure"):
+            render(self.root)
+        path.unlink()
+        with self.assertRaises(FileNotFoundError):
+            render(self.root)
+
+    def test_procedure_changes_and_version_bumps_require_regeneration(self):
+        path = self.root / "source/procedures/appointment-booking.md"
+        original = path.read_text()
+        path.write_text(original + "\nA changed booking step.\n")
+        with self.assertRaisesRegex(ValueError, "differs from source"):
+            validate(self.root)
+        path.write_text(original)
+        self.config(lambda c: c["procedures"]["appointment-booking"].update(version="1.0.1"))
+        with self.assertRaisesRegex(ValueError, "differs from source"):
+            validate(self.root)
+
+    def test_removed_procedure_in_any_consumer_is_rejected(self):
+        procedure = load_procedures(self.root)["appointment-booking"]["body"]
+        for identifier in BOOKING_ROLES:
+            with self.subTest(identifier=identifier):
+                path = self.root / "specialists" / f"{identifier}.md"
+                original = path.read_text()
+                path.write_text(original.replace(procedure, ""))
+                with self.assertRaisesRegex(ValueError, identifier):
+                    validate(self.root)
+                path.write_text(original)
 
     def test_ada_roster_resolves_all_workers_once(self):
         metadata, _ = parse_generated(render(self.root)["pa-ada.md"])
