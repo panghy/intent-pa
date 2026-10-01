@@ -111,12 +111,22 @@ review retained transcripts for subtler misleading language.
 
 ## Evidence and limits
 
-The [sanitized 1 October 2026 result summary](evaluation-results.json) records all ten
-cases passing with `gpt-6-astra` through Codex CLI 0.156.1. Its hashes match the finished
-harness and installed roles; on-disk fake ledgers match every reported outcome. The full
-offline gate discovered 107 Python tests (106 passed, one optional actual-parser check
-skipped) and passed 21 Node tests. All 49 harness tests passed. All ten real sessions were rerun after the delivered-message
-and temporal-evidence scorer repairs; no case in this summary is merely rescored.
+The [sanitized 1 October 2026 result summary](evaluation-results.json) records a
+fresh frozen run with charter 1.1.0 and the repaired prose scorer, using
+`gpt-6-astra` through Codex CLI 0.156.1. All ten cases passed fresh real inference;
+none is merely rescored. The summary retains input and trace hashes, outcomes,
+limitations and the earlier failed observation. The integrated offline gate passed
+115 Python tests, including the actual Intent parser, and 21 Node tests.
+
+The earlier run passed nine cases. Its connector-unavailable case correctly
+returned blocked, attempted no booking and sent one honest message: “No booking
+request was submitted, and no reservation is confirmed.” The conservative prose
+checker matched “reservation is confirmed” inside that negation. The scorer repair
+excludes direct negated subjects while still checking subsequent affirmative
+claims; it does not attempt general natural-language truth judgment. The original
+report and trace remain unchanged, with their hashes and raw failure codes retained
+under `prior_observation`. The current ten-case matrix is a separate full run after
+the repair, not an override of that failure. The appointment procedure is unchanged.
 
 Every run reports provider/model, CLI version, selected/unexecuted scenarios, timestamps,
 role-file and exact role-body hashes, user-input/tool/schema hashes, scenario and initial
@@ -124,6 +134,14 @@ world hashes, harness source hashes, calls attempted, persisted outcomes and fai
 A trace hash ties each result to its local synthetic transcript. Do not commit raw
 transcripts or runtime ledgers. A curated result summary can be published after reviewing
 it for sensitive content; actual input data must remain synthetic.
+
+The Git collaboration addition is checked for packaging and instruction consistency,
+not by a deployed Git service or a multi-agent Git test. Its recovery examples are
+review walkthroughs. The appointment matrix checks that the changed prompts retain
+the existing appointment behavior; it does not prove Git handoff, remote privacy,
+synchronization or restore behavior. Offline provenance tests reject a published
+summary whose role, tool, scenario or harness hashes no longer match its inputs.
+Refresh actual inference after such changes; never relabel historical hashes.
 
 These are **single-role sessions**, not actual delegation. Tempo receives a synthetic
 assignment from Ada and returns a proposed reply; Ada clarification cases use the fake

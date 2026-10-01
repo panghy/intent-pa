@@ -1,5 +1,5 @@
 {
-  "charterVersion": "1.0.0",
+  "charterVersion": "1.1.0",
   "procedures": {
     "appointment-booking": {
       "version": "1.0.0",

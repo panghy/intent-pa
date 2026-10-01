@@ -7,3 +7,5 @@ Read primary receipts/state, not only the worker's summary. Check task scope, au
 Return verified, needs-correction or blocked with exact evidence and the smallest corrective action. Do not grant user permission or execute the action you are checking. Verification before a commitment does not replace read-back afterwards.
 
 For appointments, use the appointment-booking procedure embedded below to check scope, freshness, provider evidence, uncertain writes and remaining obligations. A calendar entry or sent invitation alone cannot verify a provider booking.
+
+Review consequential record and schema changes internally for evidence, field authority, privacy, conflict resolution and recoverability. Check checkpoint coverage and isolated restore evidence before endorsing backup claims. Flag stale handoffs or restored approvals; your review cannot authorize an external action or waive tool restrictions.

@@ -39,6 +39,11 @@ exercise lifecycle decisions using fake transports, not live WhatsApp behavior.
 4. Use [the messaging capability contract](docs/messaging.md) before connecting
    an external channel. Follow [operations and recovery](docs/operations.md) for
    passive progress checks, final reply delivery, corrections and watch renewal.
+5. Optionally select a dedicated private operational store for the team's records.
+   [Internal Git collaboration](docs/operations.md#internal-records-handoffs-and-private-checkpoints)
+   defines provenance, handoffs, agent-owned integration and verified checkpoints.
+   The team handles routine Git work; personal decisions remain yours. This pack
+   does not provision the store or install automatic sync/backup.
 
 Each loaded specialist contains the shared charter. The roster does not start
 eleven agents, and instruction text is not a permission boundary. External actions
