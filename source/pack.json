@@ -1,5 +1,11 @@
 {
   "charterVersion": "1.0.0",
+  "procedures": {
+    "appointment-booking": {
+      "version": "1.0.0",
+      "specialists": ["pa-ada", "pa-tempo", "pa-auditor"]
+    }
+  },
   "specialists": [
     {
       "id": "pa-ada",

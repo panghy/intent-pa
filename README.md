@@ -5,7 +5,8 @@ Ada owns the conversation and delegates bounded work to ten specialists on deman
 Start in your normal Intent conversation. An external channel such as WhatsApp is
 optional; Ada discovers its actual capabilities before using it.
 
-This repository contains **specialist instructions and offline reference examples**.
+This repository contains **specialist instructions, offline reference examples and an
+opt-in actual-agent evaluation harness**.
 It does not install a messaging connector, authenticate accounts, receive webhooks,
 enforce spending authority, or provide a production messaging bridge. The examples
 exercise lifecycle decisions using fake transports, not live WhatsApp behavior.
@@ -50,3 +51,9 @@ separately. See the installation guide before using this pack in an existing set
 To change prompts, edit `source/`, run `make build`, then `make check` and
 `make test`. Generated `specialists/` files are the installation artifacts.
 Run `make test-watchdog` for just the Node.js passive hook tests.
+
+Ada, Tempo and Auditor receive a shared [appointment-booking procedure](source/procedures/appointment-booking.md)
+in their installed prompts. Run `make test-evals` for deterministic harness checks or
+`make eval-actual EVAL_MODEL=<accessible-model-id>` for real inference against synthetic
+services. See [evaluation setup, isolation and limitations](docs/evaluations.md). These
+single-role sessions do not deploy connectors or prove live team orchestration.
