@@ -33,7 +33,7 @@ class InstalledProcedureTests(unittest.TestCase):
             metadata, body = parse_generated(path.read_text(encoding="utf-8"))
             loaded[path.stem] = (metadata, body)
         self.assertEqual(set(loaded), EXPECTED_IDS)
-        self.assertEqual(set(loaded["pa-ada"][0]["teamAgents"]), EXPECTED_IDS - {"pa-ada"})
+        self.assertEqual(set(loaded["pa-ada"][0]["teamAgents"]), EXPECTED_IDS - {"pa-ada", "pa-pip"})
         for identifier in BOOKING_ROLES:
             self.assertEqual(loaded[identifier][1].count(self.procedure), 1)
             self.assertIn("## 8. Handoff and cleanup on every exit", loaded[identifier][1])

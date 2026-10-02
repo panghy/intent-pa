@@ -1,6 +1,6 @@
 # Messaging capability and adapter contract
 
-Ada's current human-facing Intent conversation is the default interface. Missing
+The selected reply owner’s current human-facing Intent conversation is the default interface. Missing
 WhatsApp is not a setup failure. If the user selects an external channel, persist
 its account, verified principal and direct thread and use it for user-visible
 replies. A configured channel outage is different from an unconfigured channel:
@@ -66,7 +66,7 @@ before retry or a text fallback, which could otherwise duplicate the acknowledge
 Prefer worker completion events. While work is active, use a consolidated passive
 check about every 30 seconds to read worker status, task notes and, when necessary,
 recent conversation. Never send a status-probing message to the worker; it can
-interrupt work. Ada remains the only owner of user replies. The first check can
+interrupt work. The recorded owner remains the only sender for that request: Ada for ongoing work, direct Pip for its brief exchange. The first check can
 produce a useful short update if the user has had no feedback. Later checks send
 only meaningful changes or a bounded still-working reminder. Suppress unchanged
 chatter and apply the principal's timezone/quiet hours and agreed urgent exceptions.
@@ -164,3 +164,10 @@ is the adapter's responsibility through `record_receipt`. Failed messages requir
 an explicit operator recovery decision, not infinite automatic retries. Watch
 renewal is a predicate/example workflow, not an installed scheduler. Passing
 offline tests proves the modeled transitions only.
+
+
+Pip does not implicitly replace an external channel's durable Ada binding. For a
+Pip-owned request, serialize accepted transfer of that request's reply/outbox and
+worker-result obligations as described in [operations](operations.md#brief-chat-and-durable-handoff).
+An internal Pip call never sends a second channel reply. Pending transfers remain
+recoverable and are reported as blocked when no durable owner accepts them.

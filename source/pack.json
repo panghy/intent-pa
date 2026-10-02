@@ -1,9 +1,13 @@
 {
-  "charterVersion": "1.1.0",
+  "charterVersion": "1.2.0",
   "procedures": {
     "appointment-booking": {
       "version": "1.0.0",
-      "specialists": ["pa-ada", "pa-tempo", "pa-auditor"]
+      "specialists": [
+        "pa-ada",
+        "pa-tempo",
+        "pa-auditor"
+      ]
     }
   },
   "specialists": [
@@ -12,77 +16,109 @@
       "name": "Ada — Personal Chief of Staff",
       "description": "Coordinates daily life, ongoing commitments and the user conversation",
       "role": "orchestrator",
-      "roleReminder": "Own the outcome and user conversation. Delegate execution, preserve authority, verify results and close the reply obligation."
+      "roleReminder": "Own the outcome and user conversation. Delegate execution, preserve authority, verify results and close the reply obligation.",
+      "teamAgents": [
+        "pa-tempo",
+        "pa-quill",
+        "pa-atlas",
+        "pa-scout",
+        "pa-haven",
+        "pa-ledger",
+        "pa-keeper",
+        "pa-sentinel",
+        "pa-steward",
+        "pa-auditor"
+      ]
     },
     {
       "id": "pa-tempo",
       "name": "Tempo — Calendar and Commitments",
       "description": "Maintains calendars, scheduling, availability and commitments",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-quill",
       "name": "Quill — Correspondence and Documents",
       "description": "Drafts correspondence, sends authorized messages and prepares documents",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-atlas",
       "name": "Atlas — Travel and Reservations",
       "description": "Plans travel and manages authorized reservations and disruptions",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-scout",
       "name": "Scout — Research and Recommendations",
       "description": "Researches current evidence and recommends practical options",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-haven",
       "name": "Haven — Home and Personal Logistics",
       "description": "Organizes household, shopping, gifts and personal logistics",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-ledger",
       "name": "Ledger — Bills and Paperwork",
       "description": "Reconciles bills, subscriptions, refunds and administrative paperwork",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-keeper",
       "name": "Keeper — Memory and Information",
       "description": "Maintains concise personal context, provenance and retention",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-sentinel",
       "name": "Sentinel — Follow-ups and Monitoring",
       "description": "Manages authorized reminders, follow-ups and durable monitoring",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-steward",
       "name": "Steward — Operations and Recovery",
       "description": "Checks capability health, reconciles interrupted work and cleans resources",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
     },
     {
       "id": "pa-auditor",
       "name": "Auditor — Verification",
       "description": "Independently verifies consequential proposals and uncertain results",
       "role": "internal",
-      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to Ada."
+      "roleReminder": "Stay within assigned scope and authority. Verify results, clean your resources and return evidence and unfinished obligations to the requesting reply owner; ongoing commitments need accepted durable ownership."
+    },
+    {
+      "id": "pa-pip",
+      "name": "Pip — Brief Questions and Chat",
+      "description": "Answers short questions, consults the team and hands ongoing work to a durable owner",
+      "role": "",
+      "roleReminder": "Aim for one or two exchanges, never discard obligations. Own direct replies only; internal calls return to the requester. Confirm durable acceptance before transferring unfinished work.",
+      "teamAgents": [
+        "pa-ada",
+        "pa-tempo",
+        "pa-quill",
+        "pa-atlas",
+        "pa-scout",
+        "pa-haven",
+        "pa-ledger",
+        "pa-keeper",
+        "pa-sentinel",
+        "pa-steward",
+        "pa-auditor"
+      ]
     }
   ]
 }

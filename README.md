@@ -1,7 +1,8 @@
 # Personal assistant specialists for Intent
 
-Eleven specialists for everyday planning, correspondence, research and follow-through.
-Ada owns the conversation and delegates bounded work to ten specialists on demand.
+Twelve specialists for everyday planning, correspondence, research and follow-through.
+Choose Pip for brief questions and chat, or Ada for ongoing coordination. Both can
+consult the ten domain specialists; each request has one reply owner.
 Start in your normal Intent conversation. An external channel such as WhatsApp is
 optional; Ada discovers its actual capabilities before using it.
 
@@ -13,7 +14,8 @@ exercise lifecycle decisions using fake transports, not live WhatsApp behavior.
 
 | Specialist | Responsibility |
 | --- | --- |
-| Ada (`pa-ada`) | Conversation, priorities, delegation and final replies |
+| Ada (`pa-ada`) | Durable coordination, priorities and ongoing commitments |
+| Pip (`pa-pip`) | Brief questions, context consultation and accepted durable handoffs |
 | Tempo (`pa-tempo`) | Calendar and commitments |
 | Quill (`pa-quill`) | Correspondence and documents |
 | Atlas (`pa-atlas`) | Travel and reservations |
@@ -33,7 +35,7 @@ exercise lifecycle decisions using fake transports, not live WhatsApp behavior.
    suite also uses Make and Node.js 18+ for the passive hook example.
 2. Clone this repository with your GitHub access, then follow
    [installation and onboarding](docs/installation.md) to launch a dedicated PA
-   environment and select Ada. Runtime personal records belong outside this checkout.
+   environment and select Ada or Pip. Runtime personal records belong outside this checkout.
 3. Run `make check`, `make test` and
    `python3 -m examples.demo` from the repository root for offline validation.
 4. Use [the messaging capability contract](docs/messaging.md) before connecting
@@ -46,7 +48,7 @@ exercise lifecycle decisions using fake transports, not live WhatsApp behavior.
    does not provision the store or install automatic sync/backup.
 
 Each loaded specialist contains the shared charter. The roster does not start
-eleven agents, and instruction text is not a permission boundary. External actions
+twelve agents, and instruction text is not a permission boundary. External actions
 need the principal's current authority and runtime/tool enforcement.
 
 The replacement directory replaces Intent's base specialist bundle. User and
@@ -62,3 +64,11 @@ in their installed prompts. Run `make test-evals` for deterministic harness chec
 `make eval-actual EVAL_MODEL=<accessible-model-id>` for real inference against synthetic
 services. See [evaluation setup, isolation and limitations](docs/evaluations.md). These
 single-role sessions do not deploy connectors or prove live team orchestration.
+
+Pip normally finishes in one or two exchanges. That is a working target, not an
+automatic timeout. Longer tasks, unanswered decisions and late worker results need
+a persisted handoff accepted by a durable owner before Pip relinquishes ownership.
+An unavailable owner is reported plainly, with work retained as pending. Installing
+these instructions does not install a router, handoff service or automatic retirement.
+See [brief-chat operation](docs/operations.md#brief-chat-and-durable-handoff).
+`make test-chat` tests synthetic services and the scorer; `make eval-chat EVAL_MODEL=<accessible-model-id>` runs actual Pip inference against those fake tools.

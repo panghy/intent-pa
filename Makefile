@@ -30,3 +30,12 @@ test-evals:
 eval-actual: check
 	@test -n "$(EVAL_MODEL)" || { echo "Set EVAL_MODEL to an accessible Codex model ID"; exit 2; }
 	$(PYTHON) -S -m evals.run --model "$(EVAL_MODEL)" $(EVAL_ARGS)
+
+# Pip's deterministic synthetic-service/oracle tests and opt-in actual inference.
+.PHONY: test-chat eval-chat
+test-chat:
+	$(PYTHON) -S -m unittest discover -s tests -p test_chat.py -v
+
+eval-chat: check
+	@test -n "$(EVAL_MODEL)" || { echo "Set EVAL_MODEL to an accessible Codex model ID"; exit 2; }
+	$(PYTHON) -S -m evals.chat_run --model "$(EVAL_MODEL)" $(EVAL_ARGS)

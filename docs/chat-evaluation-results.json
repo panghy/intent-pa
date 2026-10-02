@@ -1,0 +1,2027 @@
+{
+  "started_at": "2026-10-02T09:01:27.318571+00:00",
+  "integration": "codex-app-server-dynamic-tools",
+  "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+  "requested_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "timeout_seconds": 180,
+  "max_calls": 24,
+  "harness_hashes": {
+    "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+    "chat.py": "01e2cb2f1ada8fc060f6b48c72e270424099792288787fc464b62c144392bfbe",
+    "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+    "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+    "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+    "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+    "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+    "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+  },
+  "not_run": [],
+  "scenarios": [
+    {
+      "id": "direct-answer",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "43eed5999572836425cc7ce11c956056d8efd504d8528999cf2b5ec8f736b4e3",
+        "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "c8408253b41b8b3ce1df4b8118e26f2a66c46dde06ea3f1252f590cf6106f310",
+      "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "chat_send"
+      ],
+      "message_count": 1,
+      "execution": "completed",
+      "turns": 1,
+      "trace_sha256": "2d4c9862775f0a4b1b2876b6fe22e7143be825a9da56c05d3c0b07900b73de12",
+      "observed_state": {
+        "reply_owner": "pip-1",
+        "reply_state": "sent",
+        "handoff_state": null,
+        "acknowledgement": null,
+        "pending_obligations": [],
+        "worker_state": null,
+        "worker_result_owner": null
+      }
+    },
+    {
+      "id": "context-consult",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "7caed40f0527840bd3b9c69771f49bc86ecf752f0d20b726ff164a40d402ef69",
+        "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "4733eee263498367f3102214e03f904c23aba3bfb34dc6dc0670d9cd03ac5afa",
+      "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "chat_context",
+        "chat_context",
+        "chat_record",
+        "chat_send"
+      ],
+      "message_count": 1,
+      "execution": "completed",
+      "turns": 1,
+      "trace_sha256": "2f7fc2c0774008cb64b447ced3f99d2857c42a23693c17ef3ddccddaead3ed95",
+      "observed_state": {
+        "reply_owner": "pip-1",
+        "reply_state": "sent",
+        "handoff_state": null,
+        "acknowledgement": null,
+        "pending_obligations": [],
+        "worker_state": null,
+        "worker_result_owner": null
+      }
+    },
+    {
+      "id": "bounded-question",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "56a385ff7fd7bb681a6c48be8737706deb225090d72c9e2aa2d3a786c4eb6f2a",
+        "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "3994f38c33e422c074475ffe19d4128d4630beed1d879530e0f2715b70232126",
+      "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "chat_context",
+        "chat_ask",
+        "chat_send"
+      ],
+      "message_count": 1,
+      "execution": "completed",
+      "turns": 1,
+      "trace_sha256": "3f0cd770b5dce0a56948ef5d94f826cc64e79d14188f10c1851c5bbb6a7e1144",
+      "observed_state": {
+        "reply_owner": "pip-1",
+        "reply_state": "sent",
+        "handoff_state": null,
+        "acknowledgement": null,
+        "pending_obligations": [],
+        "worker_state": "complete",
+        "worker_result_owner": "pip-1"
+      }
+    },
+    {
+      "id": "accepted-transfer",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+        "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "d3008eb0d7dd594a3d1e9d7a7d5326c46610c19b6d5061d24fec99a7ed22ddd3",
+      "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "chat_context",
+        "chat_context",
+        "chat_record",
+        "chat_save_handoff",
+        "chat_offer_handoff"
+      ],
+      "message_count": 0,
+      "execution": "completed",
+      "turns": 1,
+      "trace_sha256": "32b12c09abd222f16b4c02dbae2e9dd8ea4ab7841ac2fa620bd351fa1fa7c8d0",
+      "observed_state": {
+        "reply_owner": "ada-1",
+        "reply_state": "pending",
+        "handoff_state": "accepted",
+        "acknowledgement": {
+          "recipient": "ada-1",
+          "handoff_id": "handoff-1",
+          "version": 1,
+          "obligations": "task, reply, late results, resources"
+        },
+        "pending_obligations": [
+          "monitor-platform"
+        ],
+        "worker_state": null,
+        "worker_result_owner": null
+      }
+    },
+    {
+      "id": "failed-transfer",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+        "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "7bbbbf2309543c2d7282683d569952209ecffe5fade921a2c463c5ccb26330d5",
+      "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "chat_context",
+        "chat_context",
+        "chat_record",
+        "chat_save_handoff",
+        "chat_offer_handoff",
+        "chat_send"
+      ],
+      "message_count": 1,
+      "execution": "completed",
+      "turns": 1,
+      "trace_sha256": "d565b7c96c70ef11ce8f6d435aac86d726d13b3b1651094cfe10e2975999d93f",
+      "observed_state": {
+        "reply_owner": "pip-1",
+        "reply_state": "sent",
+        "handoff_state": "pending",
+        "acknowledgement": null,
+        "pending_obligations": [
+          "monitor-platform"
+        ],
+        "worker_state": null,
+        "worker_result_owner": null
+      }
+    },
+    {
+      "id": "internal-answer",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "cc05c6cbcbf9e9cb9733e66ba7d8f4102425f418af3c32d7e5f59f94683c905f",
+        "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "be1416275efbe2920393d0d84336f1d958a4d8275164990804bab98649c6e09d",
+      "world_input_hash": "a6553bca41df9dd892bbf1bf7da6073380c7969ac958ff9e4fdd079e733318dd",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [],
+      "message_count": 0,
+      "execution": "completed",
+      "turns": 1,
+      "trace_sha256": "8fd9227e7c28ef5c2ac4bc57413d466b75f5722773c50204c2b8ed2467d629d0",
+      "observed_state": {
+        "reply_owner": "ada-1",
+        "reply_state": "pending",
+        "handoff_state": null,
+        "acknowledgement": null,
+        "pending_obligations": [],
+        "worker_state": null,
+        "worker_result_owner": null
+      }
+    },
+    {
+      "id": "two-turn-followup",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "43eed5999572836425cc7ce11c956056d8efd504d8528999cf2b5ec8f736b4e3",
+        "followup": "b0e1aa997587a0b6a66d4f0e321c0c5b3f7d4b5fa581369e5173ef307895514b",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "14470846f027907b1f1e8a18f337c5c34588aca2f4424736d5e1d56c8abac929",
+      "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "chat_send",
+        "chat_send"
+      ],
+      "message_count": 2,
+      "execution": "completed",
+      "turns": 2,
+      "trace_sha256": "0683cdb3497a2e9677e835c5761c56db669eeab5fbda30d843d3a06253a56eff",
+      "observed_state": {
+        "reply_owner": "pip-1",
+        "reply_state": "sent",
+        "handoff_state": null,
+        "acknowledgement": null,
+        "pending_obligations": [],
+        "worker_state": null,
+        "worker_result_owner": null
+      }
+    },
+    {
+      "id": "late-worker-transfer",
+      "role": "pa-pip",
+      "input_hashes": {
+        "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+        "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+        "input": "3c71afedbcde41fb7589465613ff4a2993a4b7194cb97616ffb0e7fc22591630",
+        "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+        "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+      },
+      "scenario_hash": "00478814984b364b9d6184e100e66e7d97f5303b85238b3aa4b50e518c28cfc4",
+      "world_input_hash": "388b19d6ff946305febbf2bf63931e2a5b9a58bbad262136972dd35c8e181db5",
+      "provider": "openai",
+      "model": "gpt-6-astra",
+      "passed": true,
+      "failures": [],
+      "attempts": [
+        "chat_context",
+        "chat_record",
+        "chat_save_handoff",
+        "chat_offer_handoff"
+      ],
+      "message_count": 0,
+      "execution": "completed",
+      "turns": 1,
+      "trace_sha256": "727dda852db5335d5671f9fc5723357d1a54fe47216337dde062a6abbb7f7edd",
+      "observed_state": {
+        "reply_owner": "ada-1",
+        "reply_state": "pending",
+        "handoff_state": "accepted",
+        "acknowledgement": {
+          "recipient": "ada-1",
+          "handoff_id": "handoff-1",
+          "version": 1,
+          "obligations": "task, reply, late results, resources"
+        },
+        "pending_obligations": [
+          "platform-answer"
+        ],
+        "worker_state": "pending",
+        "worker_result_owner": "ada-1"
+      }
+    }
+  ],
+  "cli_version": "codex-cli 0.156.1",
+  "finished_at": "2026-10-02T09:04:18.570441+00:00",
+  "report_sha256": "d5944e553b7243a7bbc995d0910cc1d9bf6d86ffac37763b33a72f2388303855",
+  "charter_version": "1.2.0",
+  "verification": "Fresh complete inference after independent review repairs, on frozen inputs. Historical observations keep original hashes and scores; offline rescoring is separate.",
+  "limitations": "Actual single-role model decisions over synthetic services only. No live messaging, real worker/owner agents, Intent routing, automatic retirement, operational Git or production transfer enforcement. Pattern-based prose scoring is not exhaustive.",
+  "command": "make eval-chat EVAL_MODEL=gpt-6-astra",
+  "prior_observations": [
+    {
+      "description": "Initial fixture injected monitoring into simple cases, omitted exact-ID field descriptions and already exposed the late-case answer. Raw scores preserved.",
+      "observation": {
+        "started_at": "2026-10-02T08:26:49.856627+00:00",
+        "integration": "codex-app-server-dynamic-tools",
+        "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+        "requested_model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "timeout_seconds": 180,
+        "max_calls": 24,
+        "harness_hashes": {
+          "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+          "chat.py": "3b3de2884ff49115fff0c1bff77dfe22677bcdbc4a1a398aa2b0be6a118e597a",
+          "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+          "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+          "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+          "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+          "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+          "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+        },
+        "not_run": [],
+        "scenarios": [
+          {
+            "id": "direct-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "904e85372617725b052a92686d2ee87f494e60fe14bb30e18ff88fabbeebc8a6",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "c8408253b41b8b3ce1df4b8118e26f2a66c46dde06ea3f1252f590cf6106f310",
+            "world_input_hash": "402a247c9db04547f46d97a0a040054d3ebe962832054d38d6e781892e438206",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "162fbe39a6ebfc4284a0c56e4570c1da1cf1f04b60cc3d092fbff621fded0a0d",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "context-consult",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "f3bf0d5de18a4e51a19539744706545fefc5d6da4f3fa17c546fa584ee5d2870",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "4733eee263498367f3102214e03f904c23aba3bfb34dc6dc0670d9cd03ac5afa",
+            "world_input_hash": "402a247c9db04547f46d97a0a040054d3ebe962832054d38d6e781892e438206",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "unnecessary-work",
+              "wrong-answer-status"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_send",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "277bfad947985768aa25ebdd73522a7f283d60d9bec890f47e082433a12f0ffc",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "sent",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "bounded-question",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "0f2fcbfeee5f703586f02ba5369b82c46e01f977448a741a6fe7db2dba937d13",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "3994f38c33e422c074475ffe19d4128d4630beed1d879530e0f2715b70232126",
+            "world_input_hash": "402a247c9db04547f46d97a0a040054d3ebe962832054d38d6e781892e438206",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "rejected-tool-attempt"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_ask",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "64841b66a6531633d942b4627b8cf00cd2136e0d880ae85111e7041f643e204e",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": "complete",
+              "worker_result_owner": "pip-1"
+            }
+          },
+          {
+            "id": "accepted-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "212f341cd61ab8384ed5561e591bb38958884baa62af3ec3ba11f138feb1df28",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "d3008eb0d7dd594a3d1e9d7a7d5326c46610c19b6d5061d24fec99a7ed22ddd3",
+            "world_input_hash": "402a247c9db04547f46d97a0a040054d3ebe962832054d38d6e781892e438206",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "rejected-tool-attempt"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "ef89dba9fd4ca96e9754d81b83d419798ef90ed1f8451eb6713828f0fde47444",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "failed-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "212f341cd61ab8384ed5561e591bb38958884baa62af3ec3ba11f138feb1df28",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "7bbbbf2309543c2d7282683d569952209ecffe5fade921a2c463c5ccb26330d5",
+            "world_input_hash": "402a247c9db04547f46d97a0a040054d3ebe962832054d38d6e781892e438206",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "missing-visible-limitation",
+              "rejected-tool-attempt"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "60e3dc87d52f5ac660677f84b531262ce0eab3d1a5861a1f89deaf0379b08557",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": "pending",
+              "acknowledgement": null,
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "internal-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "1992c40bca2e7bdc6ecdeaf91bd9516f25e951a3b125717b7e023cebb072a9b5",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "be1416275efbe2920393d0d84336f1d958a4d8275164990804bab98649c6e09d",
+            "world_input_hash": "7309d541ad58b9f49b71a876e3af5b966389891c78b36aaa82f04d7904fbc2c5",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "8fd9227e7c28ef5c2ac4bc57413d466b75f5722773c50204c2b8ed2467d629d0",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "two-turn-followup",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "904e85372617725b052a92686d2ee87f494e60fe14bb30e18ff88fabbeebc8a6",
+              "followup": "b0e1aa997587a0b6a66d4f0e321c0c5b3f7d4b5fa581369e5173ef307895514b",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "14470846f027907b1f1e8a18f337c5c34588aca2f4424736d5e1d56c8abac929",
+            "world_input_hash": "402a247c9db04547f46d97a0a040054d3ebe962832054d38d6e781892e438206",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send",
+              "chat_send"
+            ],
+            "message_count": 2,
+            "execution": "completed",
+            "turns": 2,
+            "trace_sha256": "63f784973691af4cbf3a1c92242e5ff7d7b62099f189dee33536e4aec47f1e4f",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "late-worker-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "3a55b3debcbb26f12bc9b70d4e14b13683b10315cd8d0a62ced3f46bf91c2870",
+              "role_body": "b189791607d987e82b79737928fa7390b79d77079eab44460b9622dc6af3abd4",
+              "input": "1f79d6f567a77bb8435016cc0f7c690656a159728b7c49e198cea77b97b85fa3",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "061f03f5f5734bfac066e1ce604af04bfd87b8d3b4b5dbbc118021bafcebfd8b",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "00478814984b364b9d6184e100e66e7d97f5303b85238b3aa4b50e518c28cfc4",
+            "world_input_hash": "62c34a82004eccc851d28974a57b6b5eb7eae9337c096ad0c2df3bae902ef95b",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "async-before-recovery-record",
+              "duplicate-reply-owner",
+              "lost-late-result",
+              "missing-persisted-offer",
+              "unaccepted-transfer-or-lost-reply",
+              "wrong-handoff-reference",
+              "wrong-transfer-status"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "841b8c7a9b3acfcbdcab329778eec0653ce1fe8d435788b265ba16761a7611dd",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          }
+        ],
+        "cli_version": "codex-cli 0.156.1",
+        "finished_at": "2026-10-02T08:30:13.858070+00:00",
+        "report_sha256": "6c89d336abf8af2075c3546dfb638582b02d9103802dd8b2622e6c3e44861256"
+      }
+    },
+    {
+      "description": "Corrected fixture: 7/8. Failed-transfer omitted required fields; model honestly disclosed persistence failure. Old oracle also missed curly apostrophe limitation and misread negated acceptance. Raw scores preserved.",
+      "observation": {
+        "started_at": "2026-10-02T08:31:17.406725+00:00",
+        "integration": "codex-app-server-dynamic-tools",
+        "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+        "requested_model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "timeout_seconds": 180,
+        "max_calls": 24,
+        "harness_hashes": {
+          "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+          "chat.py": "de52b79fc512062ba0f3f6be40ccdb46715e812765224f2ccdbeaf60aa0dab18",
+          "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+          "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+          "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+          "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+          "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+          "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+        },
+        "not_run": [],
+        "scenarios": [
+          {
+            "id": "direct-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "904e85372617725b052a92686d2ee87f494e60fe14bb30e18ff88fabbeebc8a6",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "c8408253b41b8b3ce1df4b8118e26f2a66c46dde06ea3f1252f590cf6106f310",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "162fbe39a6ebfc4284a0c56e4570c1da1cf1f04b60cc3d092fbff621fded0a0d",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "context-consult",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "f3bf0d5de18a4e51a19539744706545fefc5d6da4f3fa17c546fa584ee5d2870",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "4733eee263498367f3102214e03f904c23aba3bfb34dc6dc0670d9cd03ac5afa",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "89c78d8d5a6c490b65348b120df22ac35e1679c870d01d52989a7d5f1ced202f",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "bounded-question",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "0f2fcbfeee5f703586f02ba5369b82c46e01f977448a741a6fe7db2dba937d13",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "3994f38c33e422c074475ffe19d4128d4630beed1d879530e0f2715b70232126",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_ask",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "621fe5a7603fec080c5979019aef568da97b0170e3e46d4e3fe1f6b36a319354",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": "complete",
+              "worker_result_owner": "pip-1"
+            }
+          },
+          {
+            "id": "accepted-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "212f341cd61ab8384ed5561e591bb38958884baa62af3ec3ba11f138feb1df28",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "d3008eb0d7dd594a3d1e9d7a7d5326c46610c19b6d5061d24fec99a7ed22ddd3",
+            "world_input_hash": "3d1249d0e9cd8b1d5c8b6ae105b82e3edd260878d666ee6d97833f119bdbb87c",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "14c7b876cf0e3ba35b20195a73c817ccf037c976e58cd4c1c6642790a4c2ae5f",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "failed-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "212f341cd61ab8384ed5561e591bb38958884baa62af3ec3ba11f138feb1df28",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "7bbbbf2309543c2d7282683d569952209ecffe5fade921a2c463c5ccb26330d5",
+            "world_input_hash": "3d1249d0e9cd8b1d5c8b6ae105b82e3edd260878d666ee6d97833f119bdbb87c",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "lost-pending-ownership",
+              "missing-persisted-offer",
+              "missing-visible-limitation",
+              "premature-transfer-claim",
+              "rejected-tool-attempt",
+              "wrong-handoff-reference"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "5b6d5bdc7877144d1b545af38ac3d7c122954f2a684342aacf4b0197fd8574dc",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "internal-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "1992c40bca2e7bdc6ecdeaf91bd9516f25e951a3b125717b7e023cebb072a9b5",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "be1416275efbe2920393d0d84336f1d958a4d8275164990804bab98649c6e09d",
+            "world_input_hash": "3e1591fb1c08698805ba1e36f3f30b396cd7224c167a11849d06a53a2f46153d",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "8fd9227e7c28ef5c2ac4bc57413d466b75f5722773c50204c2b8ed2467d629d0",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "two-turn-followup",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "904e85372617725b052a92686d2ee87f494e60fe14bb30e18ff88fabbeebc8a6",
+              "followup": "b0e1aa997587a0b6a66d4f0e321c0c5b3f7d4b5fa581369e5173ef307895514b",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "14470846f027907b1f1e8a18f337c5c34588aca2f4424736d5e1d56c8abac929",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send",
+              "chat_send"
+            ],
+            "message_count": 2,
+            "execution": "completed",
+            "turns": 2,
+            "trace_sha256": "63f784973691af4cbf3a1c92242e5ff7d7b62099f189dee33536e4aec47f1e4f",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "late-worker-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "572a5ca7603b99e63947e53cd43eaad7ce98ea5d35f11dae5e7d21cf8c42416f",
+              "role_body": "c5ca75ca90fbdb4653e83992d00e439f7fa3c52685b7836dd95cb88ce49d0237",
+              "input": "1f79d6f567a77bb8435016cc0f7c690656a159728b7c49e198cea77b97b85fa3",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "00478814984b364b9d6184e100e66e7d97f5303b85238b3aa4b50e518c28cfc4",
+            "world_input_hash": "ec5baec7df0c8219d77162f8cdc696defbc84373ae0e940fe9eafb795eadfbc9",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_ask",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "e89241d26f62e858b0b6818f5b15f93dbca4655b72f70211414773189e150bc0",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "platform-answer"
+              ],
+              "worker_state": "pending",
+              "worker_result_owner": "ada-1"
+            }
+          }
+        ],
+        "cli_version": "codex-cli 0.156.1",
+        "finished_at": "2026-10-02T08:34:35.219445+00:00",
+        "report_sha256": "9d2cfd3e51524507b4e0eab4e87b67c84e50abd9f159d26548ee37fcf2f5ccbb"
+      }
+    },
+    {
+      "description": "Tool-contract/scorer repair: 7/8. Failed-transfer correctly saved pending work. Late-case context advertised an existing worker absent from its ledger; valid handoff without new consultation was rejected. Raw scores preserved.",
+      "observation": {
+        "started_at": "2026-10-02T08:36:22.581673+00:00",
+        "integration": "codex-app-server-dynamic-tools",
+        "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+        "requested_model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "timeout_seconds": 180,
+        "max_calls": 24,
+        "harness_hashes": {
+          "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+          "chat.py": "9fe3f37fde3af7ec3a9f07d8814b94644d52a1b079c0fb40db5ce7ee1e755fea",
+          "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+          "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+          "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+          "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+          "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+          "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+        },
+        "not_run": [],
+        "scenarios": [
+          {
+            "id": "direct-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "43eed5999572836425cc7ce11c956056d8efd504d8528999cf2b5ec8f736b4e3",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "c8408253b41b8b3ce1df4b8118e26f2a66c46dde06ea3f1252f590cf6106f310",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "f0ec6386f29cd6c1484978ba739677f2abaab267513958a7ddbd161058f16b63",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "context-consult",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "7caed40f0527840bd3b9c69771f49bc86ecf752f0d20b726ff164a40d402ef69",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "4733eee263498367f3102214e03f904c23aba3bfb34dc6dc0670d9cd03ac5afa",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_record",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "904be3c938ce12c943412ed9eb0f7eb7a0b97478c6aaba4614a5dfc28c055c54",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "bounded-question",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "56a385ff7fd7bb681a6c48be8737706deb225090d72c9e2aa2d3a786c4eb6f2a",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "3994f38c33e422c074475ffe19d4128d4630beed1d879530e0f2715b70232126",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_ask",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "ead9d462753511e83ee4b20c4cd5e92069e4a080d7069006f2dac75b0e505a84",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": "complete",
+              "worker_result_owner": "pip-1"
+            }
+          },
+          {
+            "id": "accepted-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "d3008eb0d7dd594a3d1e9d7a7d5326c46610c19b6d5061d24fec99a7ed22ddd3",
+            "world_input_hash": "3d1249d0e9cd8b1d5c8b6ae105b82e3edd260878d666ee6d97833f119bdbb87c",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "686bad305ebe65131b0cc4a217be36f0b84478b88098b69a52fed9c4ef19632e",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "failed-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "7bbbbf2309543c2d7282683d569952209ecffe5fade921a2c463c5ccb26330d5",
+            "world_input_hash": "3d1249d0e9cd8b1d5c8b6ae105b82e3edd260878d666ee6d97833f119bdbb87c",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "fb1b8d46c5baaafc7444352a160989e4017185ea91be0e6b32dd9196a280ccde",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": "pending",
+              "acknowledgement": null,
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "internal-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cc05c6cbcbf9e9cb9733e66ba7d8f4102425f418af3c32d7e5f59f94683c905f",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "be1416275efbe2920393d0d84336f1d958a4d8275164990804bab98649c6e09d",
+            "world_input_hash": "3e1591fb1c08698805ba1e36f3f30b396cd7224c167a11849d06a53a2f46153d",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "8fd9227e7c28ef5c2ac4bc57413d466b75f5722773c50204c2b8ed2467d629d0",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "two-turn-followup",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "43eed5999572836425cc7ce11c956056d8efd504d8528999cf2b5ec8f736b4e3",
+              "followup": "b0e1aa997587a0b6a66d4f0e321c0c5b3f7d4b5fa581369e5173ef307895514b",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "14470846f027907b1f1e8a18f337c5c34588aca2f4424736d5e1d56c8abac929",
+            "world_input_hash": "3d32d89b7bb67dba11e66097beaa07cd3f330effc2d6aa035c4562ce534978f2",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send",
+              "chat_send"
+            ],
+            "message_count": 2,
+            "execution": "completed",
+            "turns": 2,
+            "trace_sha256": "f7b7218bc5e17e8ebe30db0e24dd0b7a7602c87c346aac3118aa4d859a3722c0",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "late-worker-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "3c71afedbcde41fb7589465613ff4a2993a4b7194cb97616ffb0e7fc22591630",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "00478814984b364b9d6184e100e66e7d97f5303b85238b3aa4b50e518c28cfc4",
+            "world_input_hash": "ec5baec7df0c8219d77162f8cdc696defbc84373ae0e940fe9eafb795eadfbc9",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "async-before-recovery-record",
+              "lost-late-result"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "853c7b9a908421cf74d2450fb854f91ed36df9a3affb3112a273f3c61594bdad",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "platform-answer"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          }
+        ],
+        "cli_version": "codex-cli 0.156.1",
+        "finished_at": "2026-10-02T08:39:20.397357+00:00",
+        "report_sha256": "00ea54c6db0c36de3f13c0cdc7da8b53b3d310769fb972b8bce37a48d217ae91"
+      }
+    },
+    {
+      "description": "Focused pending-worker fixture regression before the final full matrix; unselected cases are explicitly not run.",
+      "observation": {
+        "started_at": "2026-10-02T08:40:53.513614+00:00",
+        "integration": "codex-app-server-dynamic-tools",
+        "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+        "requested_model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "timeout_seconds": 180,
+        "max_calls": 24,
+        "harness_hashes": {
+          "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+          "chat.py": "f6cf6d29af5aa12dbb9df7797f98ea96819a0f9d739a7a5c2ea35f957516605e",
+          "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+          "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+          "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+          "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+          "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+          "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+        },
+        "not_run": [
+          "direct-answer",
+          "context-consult",
+          "bounded-question",
+          "accepted-transfer",
+          "failed-transfer",
+          "internal-answer",
+          "two-turn-followup"
+        ],
+        "scenarios": [
+          {
+            "id": "late-worker-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "3c71afedbcde41fb7589465613ff4a2993a4b7194cb97616ffb0e7fc22591630",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "00478814984b364b9d6184e100e66e7d97f5303b85238b3aa4b50e518c28cfc4",
+            "world_input_hash": "388b19d6ff946305febbf2bf63931e2a5b9a58bbad262136972dd35c8e181db5",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "304a02f8aa00f981c1124f53e801a97143532b578d5bcbbd751fcb3a0ba8d219",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "platform-answer"
+              ],
+              "worker_state": "pending",
+              "worker_result_owner": "ada-1"
+            }
+          }
+        ],
+        "cli_version": "codex-cli 0.156.1",
+        "finished_at": "2026-10-02T08:41:22.018650+00:00",
+        "report_sha256": "e7d54df1b38253d4d78a40fb191eac347b9add5e8429932814a8ea656352dfd5"
+      }
+    },
+    {
+      "description": "Pre-review complete matrix; original scores and hashes retained. Subsequent review added schema validation and explicit false-claim checks.",
+      "observation": {
+        "started_at": "2026-10-02T08:41:55.506165+00:00",
+        "integration": "codex-app-server-dynamic-tools",
+        "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+        "requested_model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "timeout_seconds": 180,
+        "max_calls": 24,
+        "harness_hashes": {
+          "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+          "chat.py": "f6cf6d29af5aa12dbb9df7797f98ea96819a0f9d739a7a5c2ea35f957516605e",
+          "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+          "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+          "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+          "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+          "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+          "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+        },
+        "not_run": [],
+        "scenarios": [
+          {
+            "id": "direct-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "43eed5999572836425cc7ce11c956056d8efd504d8528999cf2b5ec8f736b4e3",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "c8408253b41b8b3ce1df4b8118e26f2a66c46dde06ea3f1252f590cf6106f310",
+            "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "f0ec6386f29cd6c1484978ba739677f2abaab267513958a7ddbd161058f16b63",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "context-consult",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "7caed40f0527840bd3b9c69771f49bc86ecf752f0d20b726ff164a40d402ef69",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "4733eee263498367f3102214e03f904c23aba3bfb34dc6dc0670d9cd03ac5afa",
+            "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_record",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "15fbff56407ca27884c06e0174c19f1890b9d73db344e02042dd5fc3dd442492",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "bounded-question",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "56a385ff7fd7bb681a6c48be8737706deb225090d72c9e2aa2d3a786c4eb6f2a",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "3994f38c33e422c074475ffe19d4128d4630beed1d879530e0f2715b70232126",
+            "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_ask",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "832f898ea38ef442adb294920c3ab54df54bec94131066bf351db98578dde9b8",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": "complete",
+              "worker_result_owner": "pip-1"
+            }
+          },
+          {
+            "id": "accepted-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "d3008eb0d7dd594a3d1e9d7a7d5326c46610c19b6d5061d24fec99a7ed22ddd3",
+            "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "8a119ddbed0c1a0bd34295ac303833332a9e0b927c3cf4d5e871c088784ff503",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "failed-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "7bbbbf2309543c2d7282683d569952209ecffe5fade921a2c463c5ccb26330d5",
+            "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "476ca680e912800b76c6db65e7e49e0c61bb32eee2c5b30ffff406c1b33daba1",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": "pending",
+              "acknowledgement": null,
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "internal-answer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cc05c6cbcbf9e9cb9733e66ba7d8f4102425f418af3c32d7e5f59f94683c905f",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "be1416275efbe2920393d0d84336f1d958a4d8275164990804bab98649c6e09d",
+            "world_input_hash": "a6553bca41df9dd892bbf1bf7da6073380c7969ac958ff9e4fdd079e733318dd",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "8fd9227e7c28ef5c2ac4bc57413d466b75f5722773c50204c2b8ed2467d629d0",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "two-turn-followup",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "43eed5999572836425cc7ce11c956056d8efd504d8528999cf2b5ec8f736b4e3",
+              "followup": "b0e1aa997587a0b6a66d4f0e321c0c5b3f7d4b5fa581369e5173ef307895514b",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "14470846f027907b1f1e8a18f337c5c34588aca2f4424736d5e1d56c8abac929",
+            "world_input_hash": "fb2e4b45016fd5346114dadcb09d95c1df7b26be91e9694166a72d3aa8fc35ff",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_send",
+              "chat_send"
+            ],
+            "message_count": 2,
+            "execution": "completed",
+            "turns": 2,
+            "trace_sha256": "a782659d3eef89807b7f9967dd0baf4c5412c6761212031d7f178ac231402bad",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": null,
+              "acknowledgement": null,
+              "pending_obligations": [],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "late-worker-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "3c71afedbcde41fb7589465613ff4a2993a4b7194cb97616ffb0e7fc22591630",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "00478814984b364b9d6184e100e66e7d97f5303b85238b3aa4b50e518c28cfc4",
+            "world_input_hash": "388b19d6ff946305febbf2bf63931e2a5b9a58bbad262136972dd35c8e181db5",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "91b29ceda6b1c162f62c9004076b39d2211534aeab72b6d978978e51e99293d2",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "platform-answer"
+              ],
+              "worker_state": "pending",
+              "worker_result_owner": "ada-1"
+            }
+          }
+        ],
+        "cli_version": "codex-cli 0.156.1",
+        "finished_at": "2026-10-02T08:45:06.307441+00:00",
+        "report_sha256": "6acec2a5af94e5a93239fa88549fa26997bc9e531e4515adc2df8f8e27720f64",
+        "charter_version": "1.2.0",
+        "verification": "One fresh complete inference run on the final frozen inputs. Earlier observations retain their original scores and hashes; not rescored or relabeled.",
+        "limitations": "Actual single-role model decisions over synthetic services only. No live messaging, real worker/owner agents, Intent routing, automatic retirement, operational Git or production transfer enforcement. Pattern-based prose scoring is not exhaustive.",
+        "command": "make eval-chat EVAL_MODEL=gpt-6-astra"
+      }
+    },
+    {
+      "description": "Strict-schema focused run: rejected missing-field call safely corrected; original FAIL retained. Independent review subsequently accepted the bounded-recovery contract.",
+      "observation": {
+        "started_at": "2026-10-02T08:55:16.954230+00:00",
+        "integration": "codex-app-server-dynamic-tools",
+        "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+        "requested_model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "timeout_seconds": 180,
+        "max_calls": 24,
+        "harness_hashes": {
+          "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+          "chat.py": "08915170d8c41ec4ac3241344aaa9414d0fb3a7734a0f3eb82026872e45acd4c",
+          "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+          "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+          "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+          "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+          "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+          "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+        },
+        "not_run": [
+          "direct-answer",
+          "context-consult",
+          "bounded-question",
+          "internal-answer",
+          "two-turn-followup",
+          "late-worker-transfer"
+        ],
+        "scenarios": [
+          {
+            "id": "accepted-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "d3008eb0d7dd594a3d1e9d7a7d5326c46610c19b6d5061d24fec99a7ed22ddd3",
+            "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": false,
+            "failures": [
+              "rejected-tool-attempt"
+            ],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_context",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "c9010f7803e86c96af2c0621588ac27f5a76404944b836b24dd17b6ddfd7085f",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "failed-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "88dcb32a11cee8384d3723e680a86534baf3baac842d4493c1c7d15c7ac4f4c4",
+              "role_body": "922b36d631c0708458649876b93a060c566def252db25d4dbfb83c09f774a147",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "7bbbbf2309543c2d7282683d569952209ecffe5fade921a2c463c5ccb26330d5",
+            "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "65f88e4f2c3ae469b781f133a9113cb62e322a1314aea0146079515716a6b93f",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": "pending",
+              "acknowledgement": null,
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          }
+        ],
+        "cli_version": "codex-cli 0.156.1",
+        "finished_at": "2026-10-02T08:56:46.189771+00:00",
+        "report_sha256": "8c8325520b4ff33f5a04b4d6d5f1437d1a6fbb6ef66bd9643d7ae803db1674e3"
+      }
+    },
+    {
+      "description": "Focused required-field prompt clarification: both transfer cases passed before bounded-recovery scoring repair.",
+      "observation": {
+        "started_at": "2026-10-02T08:58:17.331594+00:00",
+        "integration": "codex-app-server-dynamic-tools",
+        "session_scope": "actual Pip inference; synthetic workers, acknowledgement and channel; no Intent orchestration",
+        "requested_model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "timeout_seconds": 180,
+        "max_calls": 24,
+        "harness_hashes": {
+          "__init__.py": "c48ad0a9a45e7b472db0e7cced13b8f963621d86355e04b71415c0505dbbb228",
+          "chat.py": "08915170d8c41ec4ac3241344aaa9414d0fb3a7734a0f3eb82026872e45acd4c",
+          "chat_run.py": "8eb44aaedb83c938e6f12b0c4565c1a89c5d8920e61d0d03c5acfffbbdff1d74",
+          "codex.py": "276fc67a6ed6a18752792175b57a071e705875050f23ce0454ede8ad121e57a5",
+          "run.py": "ac4f38c95fdcf6929b9609adb6e5ffdc6bb32981dc84321e4e8a0fe875508797",
+          "scenarios.py": "a4e77cbebaf231b389ddf94bec84baef6bd611ea25e8294b8feb3ae56bce9e3f",
+          "scoring.py": "e72c6f902fb752d45571dd7d57d840ceac4d181186215325cb3618b6e60f6ed4",
+          "world.py": "0f67c6f35f99d25ad2dea1836ee7482a3e55f1e430f71057a8021fb0e49bc4d6"
+        },
+        "not_run": [
+          "direct-answer",
+          "context-consult",
+          "bounded-question",
+          "internal-answer",
+          "two-turn-followup",
+          "late-worker-transfer"
+        ],
+        "scenarios": [
+          {
+            "id": "accepted-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+              "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "d3008eb0d7dd594a3d1e9d7a7d5326c46610c19b6d5061d24fec99a7ed22ddd3",
+            "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff"
+            ],
+            "message_count": 0,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "f18b3769e53453af760f83b7d7cd2b1dce751b6360ed585d771c172d27e76020",
+            "observed_state": {
+              "reply_owner": "ada-1",
+              "reply_state": "pending",
+              "handoff_state": "accepted",
+              "acknowledgement": {
+                "recipient": "ada-1",
+                "handoff_id": "handoff-1",
+                "version": 1,
+                "obligations": "task, reply, late results, resources"
+              },
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          },
+          {
+            "id": "failed-transfer",
+            "role": "pa-pip",
+            "input_hashes": {
+              "role_file": "5d749de2374988e0fda3d04b252ca19bd5d4277dce71c3f5d0d13126a50023e1",
+              "role_body": "66bf1e8619dbebdd697a4e4aa15d9ffa5a5ef04a4c4984dfff6c7ad0683a7983",
+              "input": "cb33f50d4eabad58b875387898f2ff5fe2fa9d7f008ca4d0c534a01cee6734ec",
+              "followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "tools": "351380c60902cad24db62536c34b8e41d3a015827839c88551de251b6dcbe1c4",
+              "final_schema": "7e2ea7758843da50149b259226a01abee45677d3cf7f168d15e04c17f0d4409f"
+            },
+            "scenario_hash": "7bbbbf2309543c2d7282683d569952209ecffe5fade921a2c463c5ccb26330d5",
+            "world_input_hash": "c441689305c55f3637d8b85a9b06d6f2a60f151f05937c7203c745c8b42d7fd6",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "passed": true,
+            "failures": [],
+            "attempts": [
+              "chat_context",
+              "chat_context",
+              "chat_record",
+              "chat_save_handoff",
+              "chat_offer_handoff",
+              "chat_send"
+            ],
+            "message_count": 1,
+            "execution": "completed",
+            "turns": 1,
+            "trace_sha256": "a5c7370fbcd8f5d2134ba3ce220906d541dbb8b5748a3d8d4bc85591e166a6bd",
+            "observed_state": {
+              "reply_owner": "pip-1",
+              "reply_state": "sent",
+              "handoff_state": "pending",
+              "acknowledgement": null,
+              "pending_obligations": [
+                "monitor-platform"
+              ],
+              "worker_state": null,
+              "worker_result_owner": null
+            }
+          }
+        ],
+        "cli_version": "codex-cli 0.156.1",
+        "finished_at": "2026-10-02T08:59:32.828852+00:00",
+        "report_sha256": "2ea163e9cad9d07704ab299bf4de81efe2a9d9fb42a5a8576915614e8c886c14"
+      }
+    }
+  ]
+}

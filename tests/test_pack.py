@@ -26,7 +26,7 @@ class PackTests(unittest.TestCase):
         path.write_text(json.dumps(config))
 
     def test_reproducible_generated_pack(self):
-        self.assertEqual(validate(self.root), 11)
+        self.assertEqual(validate(self.root), 12)
         self.assertEqual(render(self.root), render(self.root))
         self.assertEqual(set(render(self.root)), {f"{i}.md" for i in EXPECTED_IDS})
 
@@ -101,11 +101,44 @@ class PackTests(unittest.TestCase):
         metadata, _ = parse_generated(render(self.root)["pa-ada.md"])
         self.assertEqual(metadata["role"], "orchestrator")
         self.assertEqual(len(metadata["teamAgents"]), 10)
-        self.assertEqual(set(metadata["teamAgents"]), EXPECTED_IDS - {"pa-ada"})
+        self.assertEqual(set(metadata["teamAgents"]), EXPECTED_IDS - {"pa-ada", "pa-pip"})
         for identifier in metadata["teamAgents"]:
             worker, _ = parse_generated(render(self.root)[f"{identifier}.md"])
             self.assertEqual(worker["role"], "internal")
             self.assertNotIn("teamAgents", worker)
+
+    def test_pip_is_selectable_and_knows_every_other_role(self):
+        metadata, body = parse_generated(render(self.root)["pa-pip.md"])
+        self.assertEqual(metadata["role"], "")
+        self.assertEqual(set(metadata["teamAgents"]), EXPECTED_IDS - {"pa-pip"})
+        self.assertEqual(len(metadata["teamAgents"]), 11)
+        for identifier in EXPECTED_IDS - {"pa-pip"}:
+            self.assertIn(identifier, body)
+        self.assertIn("one or two exchanges", body)
+        self.assertIn("not a hard expiry", body)
+        self.assertIn("recipient acceptance", body)
+        self.assertIn("pending handoff", body)
+        self.assertIn("late worker results", body)
+
+    def test_invalid_rosters_are_rejected(self):
+        for roster in (["pa-ada"], ["pa-tempo"] * 10, ["pa-missing"], "pa-tempo"):
+            with self.subTest(roster=roster):
+                self.config(lambda c: c["specialists"][0].update(teamAgents=roster))
+                with self.assertRaisesRegex(ValueError, "roster"):
+                    render(self.root)
+
+    def test_worker_roster_is_rejected(self):
+        self.config(lambda c: c["specialists"][1].update(teamAgents=["pa-ada"]))
+        with self.assertRaisesRegex(ValueError, "metadata"):
+            render(self.root)
+
+    def test_entrypoints_share_reply_ownership_without_ada_only_rule(self):
+        for identifier in ("pa-ada", "pa-pip"):
+            _, body = parse_generated(render(self.root)[identifier + ".md"])
+            self.assertIn("Exactly one reply owner per request/thread", body)
+            self.assertIn("When called internally", body)
+            self.assertNotIn("Ada is the single owner of user-facing replies", body)
+            self.assertNotIn("Ada verifies the consolidated outcome and owns the final reply obligation", body)
 
     def test_missing_charter_in_one_artifact_is_rejected(self):
         path = self.root / "specialists/pa-tempo.md"
@@ -122,12 +155,12 @@ class PackTests(unittest.TestCase):
 
     def test_duplicate_id_is_rejected(self):
         self.config(lambda c: c["specialists"][1].update(id="pa-ada"))
-        with self.assertRaisesRegex(ValueError, "eleven unique"):
+        with self.assertRaisesRegex(ValueError, "twelve unique"):
             render(self.root)
 
     def test_missing_role_is_rejected(self):
         self.config(lambda c: c["specialists"].pop())
-        with self.assertRaisesRegex(ValueError, "eleven unique"):
+        with self.assertRaisesRegex(ValueError, "twelve unique"):
             render(self.root)
 
     def test_unknown_metadata_is_rejected(self):
