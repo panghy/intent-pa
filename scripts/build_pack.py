@@ -9,8 +9,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_IDS = {
     "pa-ada", "pa-tempo", "pa-quill", "pa-atlas", "pa-scout", "pa-haven",
-    "pa-ledger", "pa-keeper", "pa-sentinel", "pa-steward", "pa-auditor",
+    "pa-ledger", "pa-keeper", "pa-sentinel", "pa-steward", "pa-auditor", "pa-pip",
 }
+ENTRYPOINT_ROLES = {"pa-ada": "orchestrator", "pa-pip": ""}
+WORKER_IDS = EXPECTED_IDS - ENTRYPOINT_ROLES.keys()
+ROSTERS = {"pa-ada": WORKER_IDS, "pa-pip": EXPECTED_IDS - {"pa-pip"}}
 FRONTMATTER_KEYS = {"name", "description", "role", "roleReminder", "teamAgents"}
 BOOKING_ROLES = {"pa-ada", "pa-tempo", "pa-auditor"}
 
@@ -23,13 +26,22 @@ def load_sources(root=ROOT):
     roles = config["specialists"]
     ids = [role["id"] for role in roles]
     if len(ids) != len(EXPECTED_IDS) or set(ids) != EXPECTED_IDS:
-        raise ValueError("Expected exactly the eleven unique pa-* specialist IDs")
+        raise ValueError("Expected exactly the twelve unique pa-* specialist IDs")
     for role in roles:
-        expected_role = "orchestrator" if role["id"] == "pa-ada" else "internal"
+        expected_role = ENTRYPOINT_ROLES.get(role["id"], "internal")
         if role["role"] != expected_role:
             raise ValueError(f"Invalid role for {role['id']}")
-        if set(role) != {"id", "name", "description", "role", "roleReminder"}:
+        fields = {"id", "name", "description", "role", "roleReminder"}
+        if role["id"] in ENTRYPOINT_ROLES:
+            fields.add("teamAgents")
+        if set(role) != fields:
             raise ValueError(f"Unsupported specialist metadata for {role['id']}")
+        if role["id"] in ROSTERS:
+            roster = role["teamAgents"]
+            expected = ROSTERS[role["id"]]
+            if (not isinstance(roster, list) or any(not isinstance(i, str) for i in roster)
+                    or len(roster) != len(expected) or set(roster) != expected):
+                raise ValueError(f"Invalid roster for {role['id']}")
         for key in ("name", "description", "roleReminder"):
             if not isinstance(role[key], str) or not role[key].strip():
                 raise ValueError(f"Missing {key} for {role['id']}")
@@ -74,8 +86,6 @@ def render(root=ROOT):
     for role in roles:
         identifier = role["id"]
         metadata = {k: v for k, v in role.items() if k != "id"}
-        if identifier == "pa-ada":
-            metadata["teamAgents"] = [r["id"] for r in roles if r["id"] != identifier]
         frontmatter = "\n".join(
             f"{key}: {json.dumps(value, ensure_ascii=False)}"
             for key, value in metadata.items()
@@ -115,16 +125,16 @@ def validate(root=ROOT):
     directory = root / "specialists"
     actual = {p.name for p in directory.iterdir()} if directory.exists() else set()
     if actual != set(expected):
-        raise ValueError("Specialist directory must contain exactly the eleven generated files")
+        raise ValueError("Specialist directory must contain exactly the twelve generated files")
     for filename, content in expected.items():
         actual_content = (directory / filename).read_text(encoding="utf-8")
         if actual_content != content:
             raise ValueError(f"Generated prompt differs from source: {filename}; run make build")
         metadata, _ = parse_generated(actual_content)
-        if filename == "pa-ada.md":
-            roster = metadata["teamAgents"]
-            if len(roster) != 10 or set(roster) != EXPECTED_IDS - {"pa-ada"}:
-                raise ValueError("Ada's roster must contain every worker once")
+        identifier = Path(filename).stem
+        if identifier in ROSTERS:
+            if set(metadata["teamAgents"]) != ROSTERS[identifier]:
+                raise ValueError(f"Invalid roster for {identifier}")
         elif "teamAgents" in metadata:
             raise ValueError(f"Worker must not declare a roster: {filename}")
     return len(expected)

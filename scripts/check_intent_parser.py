@@ -79,14 +79,14 @@ def main():
         if result.returncode:
             raise SystemExit(f"Actual parser fixture failed:\n{result.stderr}")
         loaded = json.loads(result.stdout)
-        if len(loaded) != 11 or len({item["id"] for item in loaded}) != 11:
-            raise SystemExit("Actual parser did not return eleven unique specialists")
+        if len(loaded) != 12 or len({item["id"] for item in loaded}) != 12:
+            raise SystemExit("Actual parser did not return twelve unique specialists")
         for path, item in zip(files, loaded):
             expected_metadata, expected_prompt = parse_generated(path.read_text(encoding="utf-8"))
             if item["metadata"] != expected_metadata or item["prompt"] != expected_prompt:
                 raise SystemExit(f"Actual parser changed metadata or prompt body: {path.name}")
     fingerprint = hashlib.sha256(source.encode()).hexdigest()
-    print(f"Actual Intent parser preserved metadata, roster and full prompt for 11 specialists; source SHA-256 {fingerprint}")
+    print(f"Actual Intent parser preserved metadata, roster and full prompt for 12 specialists; source SHA-256 {fingerprint}")
 
 
 if __name__ == "__main__":

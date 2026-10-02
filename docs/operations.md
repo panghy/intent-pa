@@ -3,7 +3,8 @@
 Keep a private task/action ledger, channel binding, outbox, schedule ledger and
 resource registry. Store IDs and compact facts with provenance; keep credentials
 in the credential service and original documents in their authoritative systems.
-Ada owns user replies; workers return evidence and cleanup status to Ada.
+Ada owns ongoing replies; direct Pip owns its brief request/thread. Workers return
+evidence and cleanup status to the current requester, never a duplicate user send.
 
 ## Internal records, handoffs and private checkpoints
 
@@ -83,7 +84,7 @@ Restoring indexes cannot reconstruct excluded documents or credential services.
 
 ### Worker handoff and integration
 
-Ada assigns the task/version, bounded authority and success condition. A worker
+The entrypoint assigns the task/version, bounded authority and success condition. A worker
 starts from the recorded integrated base and record versions. Parallel workers
 use separate scoped worktrees/branches when supported; otherwise Steward
 serializes editing and attributed commits in the shared checkout. Never switch
@@ -342,3 +343,48 @@ wakeup, inbound replay, ambiguous sends, receipt meaning, correction failure pat
 quiet hours, schedule expiry/restart, cancellation races and resource cleanup with
 an explicitly authorized staging account. No-spend staging comes before bounded
 real errands.
+
+
+## Brief chat and durable handoff
+
+Select Pip for a one-off question. It can answer directly, read a relevant shared
+record, ask an existing specialist, or delegate a bounded task. One or two exchanges
+is a target; an unanswered follow-up is not discarded. It reads existing profile
+context rather than repeating onboarding, and does not turn casual chat into memory.
+Explicit durable preferences go to Keeper with source context and a responsible owner.
+
+Exactly one reply owner is recorded per request/thread. A directly selected Pip
+answers there. An internally called Pip returns its result to the requester. Ada
+continues to own other ongoing threads; selecting Pip is not a global channel rebind.
+The Ada-specific watchdog and lifecycle examples above remain durable-owner examples,
+not a background service that Pip starts for every question.
+
+Before launching work that may outlive the exchange, persist a recovery record.
+Before leaving it, obtain a durable recipient's explicit acknowledgement of the
+current handoff ID/version. Include the source channel/thread/message, principal and
+authority reference, task/version, evidence pointers, worker IDs and result records,
+pending decisions/actions, unknown writes, outbox/reply state and next sender,
+resource owners, next action and check time. A task assignment, notification, Git
+commit or queued message is not acceptance. Do not create another follow-up on every
+retry. Preserve corrected facts and late results in the existing canonical records.
+
+Only after acceptance may the ownership record change. Ada reads late worker results
+from those records and establishes any required subscriptions using its own supported
+tools before Pip cleans up its own watch. Never impersonate another resource owner,
+assume a hook's ownership can be changed, or delete an unsent reply. The accepting
+owner sends the remaining response; Pip does not send the same response too.
+
+If transfer fails or tools cannot support it, keep a pending handoff under the original
+owner with reason and recovery action. Explain the lack of automatic follow-through
+in plain language. Ending a blocked turn is not successful retirement: never delete
+the session or claim monitoring is active. If persistence is unavailable, disclose it
+and avoid launching unrecoverable asynchronous work. Restart recovery reconciles the
+current authority, writes, replies and acknowledgement before any replay.
+
+The supported Intent surfaces inspected for these instructions are `ws.agent.list`,
+`ws.note.listTasks`, `ws.agent.delegate`, `ws.agent.send(..., "queue")`, read-only
+agent status/conversation, notes, watches and owner-scoped cleanup. None is a dedicated
+atomic PA transfer API. Implementations must supply validated durable acknowledgements
+and serialized ownership before deploying this contract. The evaluation tools named
+`chat_*` are synthetic adapters only; they are not Intent APIs. The pack itself does
+not enforce lifetime, transfer atomicity, routing, recovery or delivery.

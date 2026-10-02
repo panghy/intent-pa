@@ -63,8 +63,13 @@ messaging account. In the dedicated environment:
 1. Create or reuse one PA workspace rooted in the separate runtime workspace.
    Inspect its shared/project instructions for development rules that would
    conflict with personal assistant work.
-2. Verify that all eleven `pa-*` IDs appear in the specialist catalog. Select
-   `pa-ada` as the human-facing orchestrator when creating its conversation.
+2. Verify that all twelve `pa-*` IDs appear in the specialist catalog. Select
+   `pa-ada` as the human-facing orchestrator for ongoing coordination, or `pa-pip`
+   in the single-agent picker for brief questions. Pip uses the supported `role: ""`
+   (standard, selectable) metadata; it is not an internal-only worker. Ada remains
+   the sole team-card orchestrator. Pip’s `teamAgents` lists Ada and the ten domain
+   roles; Ada’s routine roster lists only the ten domain workers. Rosters are
+   advisory metadata, not automatic spawning or runtime routing.
 3. Record that workspace and Ada agent identity in a private routing ledger.
    On subsequent startup, resolve the recorded identity first. Do not create a
    fresh Ada merely because she is idle. A bootstrap service must serialize
@@ -89,9 +94,16 @@ agents. A live bootstrap must supply those operations using the installed API.
 Do not enable `serve --resume-all` until ambiguous-write recovery has been tested:
 it force-resumes interrupted agents, rather than authorizing duplicate actions.
 
+For a standalone Pip chat, no Ada bootstrap is needed for a simple answer. Reuse
+existing durable Ada/task identities if work needs to continue; do not start a new
+Ada merely because the recorded one is idle. Shared records and acceptance must be
+available before promising ongoing follow-through. If the installed tools cannot
+persist or acknowledge transfer, report that limit and retain recoverable pending
+work; this pack does not supply a transfer API. Do not retire Pip on a turn counter.
+
 ## Onboard only what is needed
 
-Ask for timezone and language, preferred short-message style, quiet hours and
+Read the existing principal profile first; ask only for missing relevant timezone and language, preferred short-message style, quiet hours and
 urgent exceptions, active commitments, and which accounts the user wants to
 connect. Defaults are preparation and reversible internal organization; existing
 concrete instructions can authorize bounded external actions without redundant

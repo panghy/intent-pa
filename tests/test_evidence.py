@@ -53,5 +53,30 @@ class PublishedEvidenceTests(unittest.TestCase):
                 }))
 
 
+class PublishedChatEvidenceTests(unittest.TestCase):
+    def test_current_chat_evidence_matches_exact_inputs(self):
+        from evals.chat import CASES, ChatWorld
+        from evals.chat_run import compose_chat
+        report = json.loads((ROOT / "docs/chat-evaluation-results.json").read_text())
+        self.assertEqual(report["harness_hashes"], {
+            p.name: digest(p.read_text()) for p in sorted((ROOT / "evals").glob("*.py"))
+        })
+        self.assertEqual(report["not_run"], [])
+        self.assertEqual(len(report["scenarios"]), len(CASES))
+        self.assertEqual({r["id"] for r in report["scenarios"]}, {c.id for c in CASES})
+        self.assertLess(report["started_at"], report["finished_at"])
+        cases = {c.id:c for c in CASES}
+        for row in report["scenarios"]:
+            with self.subTest(case=row["id"]):
+                case = cases[row["id"]]
+                self.assertEqual(row["input_hashes"], compose_chat(case)[2])
+                self.assertEqual(row["scenario_hash"], digest(vars(case)))
+                self.assertEqual(row["world_input_hash"], digest(ChatWorld(case).context()))
+                self.assertEqual(row["execution"], "completed")
+                self.assertEqual(row["model"], report["requested_model"])
+                self.assertEqual(row["turns"], 2 if case.followup else 1)
+                self.assertRegex(row["trace_sha256"], r"^[0-9a-f]{64}$")
+
+
 if __name__ == "__main__":
     unittest.main()

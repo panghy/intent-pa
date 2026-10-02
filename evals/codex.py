@@ -131,17 +131,23 @@ class CodexSession:
         if started["model"] != model or started.get("instructionSources"):
             raise ProviderError("Unexpected model fallback or host instruction contamination.")
         self.metadata = {"provider": started["modelProvider"], "model": started["model"]}
-        thread_id = started["thread"]["id"]
+        self.thread_id = started["thread"]["id"]
+        self.calls = 0
+        return self.continue_turn(prompt, dispatch, max_calls, output_schema, observe_message)
+
+    def continue_turn(self, prompt, dispatch, max_calls=24, output_schema=None, observe_message=None):
+        """A second real turn in the same thread; deadline and call budget stay shared."""
+        thread_id = self.thread_id
         self.request("turn/start", {"threadId": thread_id, "environments": [],
                                    "effort": "low", "outputSchema": output_schema,
                                    "input": [{"type": "text", "text": prompt}]})
-        messages, calls = [], 0
+        messages = []
         while True:
             event = self.receive()
             method, params = event.get("method"), event.get("params", {})
             if method == "item/tool/call":
-                calls += 1
-                if calls > max_calls:
+                self.calls += 1
+                if self.calls > max_calls:
                     raise ProviderError("Actual-agent tool-call budget exceeded.")
                 output = dispatch(params["tool"], params["arguments"])
                 self.send({"id": event["id"], "result": {"success": True, "contentItems": [
