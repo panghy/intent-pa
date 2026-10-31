@@ -49,7 +49,10 @@ redacted checkpoints under the rules below; never live databases or secrets.
 
 `INTENTD_SPECIALISTS_DIR` is the environment alternative to the launch flag. The
 flag takes precedence. This replaces the whole base tier, including the bundled
-coding specialists; it is not an additive pack install. User definitions in
+coding specialists and Intent's own app Assistant; it is not an additive pack install.
+Intent's Assistant chat always starts the `chief-of-staff` specialist, so the pack
+ships a hidden replacement written for a non-coding audience. Keep that file in the
+directory: without it the Assistant fails with an unknown-specialist error. User definitions in
 `~/.intent/specialists/` and project definitions in `.intent/specialists/` can still
 override it. A missing or empty replacement directory means an empty base tier.
 The replacement directory is static: restart the daemon and create fresh test
@@ -63,7 +66,9 @@ messaging account. In the dedicated environment:
 1. Create or reuse one PA workspace rooted in the separate runtime workspace.
    Inspect its shared/project instructions for development rules that would
    conflict with personal assistant work.
-2. Verify that all twelve `pa-*` IDs appear in the specialist catalog. Select
+2. Verify that all twelve `pa-*` IDs appear in the specialist catalog, and that the
+   app Assistant chat opens (its `chief-of-staff` definition is hidden from the
+   picker, so check it by starting an Assistant chat). Select
    `pa-ada` as the human-facing orchestrator for ongoing coordination, or `pa-pip`
    in the single-agent picker for brief questions. Pip uses the supported `role: ""`
    (standard, selectable) metadata; it is not an internal-only worker. Ada remains

@@ -7,8 +7,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_pack import BOOKING_ROLES, EXPECTED_IDS, load_procedures, load_sources, parse_generated, render, validate
+from build_pack import (
+    APP_ASSISTANT_ID, BOOKING_ROLES, EXPECTED_IDS, intent_metadata, load_procedures, load_sources,
+    parse_generated, render, validate,
+)
 from check_intent_parser import function
+
+
+def team_prompts(rendered):
+    return {name: content for name, content in rendered.items() if name != f"{APP_ASSISTANT_ID}.md"}
+
+
+def team_paths(root):
+    return [path for path in sorted((root / "specialists").glob("*.md")) if path.stem != APP_ASSISTANT_ID]
 
 
 class PackTests(unittest.TestCase):
@@ -26,13 +37,13 @@ class PackTests(unittest.TestCase):
         path.write_text(json.dumps(config))
 
     def test_reproducible_generated_pack(self):
-        self.assertEqual(validate(self.root), 12)
+        self.assertEqual(validate(self.root), 13)
         self.assertEqual(render(self.root), render(self.root))
-        self.assertEqual(set(render(self.root)), {f"{i}.md" for i in EXPECTED_IDS})
+        self.assertEqual(set(render(self.root)), {f"{i}.md" for i in EXPECTED_IDS | {APP_ASSISTANT_ID}})
 
     def test_every_loaded_body_includes_identical_complete_charter(self):
         version, _, charter = load_sources(self.root)
-        for filename, content in render(self.root).items():
+        for filename, content in team_prompts(render(self.root)).items():
             with self.subTest(filename=filename):
                 metadata, body = parse_generated(content)
                 self.assertIn(f"Charter version: {version}", body)
@@ -206,7 +217,7 @@ class PackTests(unittest.TestCase):
             "No routine user review of branches, commits or PRs",
             "Actual tool restrictions and higher-priority rules still apply",
         )
-        for path in sorted((self.root / "specialists").glob("*.md")):
+        for path in team_paths(self.root):
             _, body = parse_generated(path.read_text())
             for obligation in required:
                 with self.subTest(role=path.stem, obligation=obligation):
@@ -214,7 +225,7 @@ class PackTests(unittest.TestCase):
             self.assertNotIn("No credentials or personal records in a Git repository", body)
 
     def test_git_contract_removal_from_any_installed_role_is_detected(self):
-        for path in sorted((self.root / "specialists").glob("*.md")):
+        for path in team_paths(self.root):
             with self.subTest(role=path.stem):
                 original = path.read_text()
                 start = original.index("### Internal Git collaboration")
@@ -251,11 +262,147 @@ class PackTests(unittest.TestCase):
             "Never store secrets or raw account exports in Git",
             "success, failure and cancellation paths",
         )
-        for filename, content in render(self.root).items():
+        for filename, content in team_prompts(render(self.root)).items():
             _, body = parse_generated(content)
             for obligation in obligations:
                 with self.subTest(filename=filename, obligation=obligation):
                     self.assertIn(obligation, body)
+
+
+class AppAssistantTests(unittest.TestCase):
+    """Intent's app Assistant always starts the `chief-of-staff` specialist.
+
+    A replacement specialists directory removes Intent's bundled copy, so the
+    pack must ship its own or the Assistant fails with "unknown specialist".
+    """
+
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        shutil.copytree(ROOT / "source", self.root / "source")
+        shutil.copytree(ROOT / "specialists", self.root / "specialists")
+
+    def config(self, change):
+        path = self.root / "source/pack.json"
+        config = json.loads(path.read_text())
+        change(config)
+        path.write_text(json.dumps(config))
+
+    def assistant(self):
+        return parse_generated((ROOT / "specialists" / "chief-of-staff.md").read_text(encoding="utf-8"))
+
+    def test_installed_directory_ships_the_required_assistant(self):
+        self.assertEqual(APP_ASSISTANT_ID, "chief-of-staff")
+        self.assertTrue((ROOT / "specialists/chief-of-staff.md").is_file())
+        self.assertEqual(validate(ROOT), 13)
+
+    def test_assistant_metadata_matches_intent_app_contract(self):
+        metadata, body = self.assistant()
+        self.assertEqual(metadata["name"], "Assistant")
+        self.assertIs(metadata["hidden"], True)
+        self.assertEqual(metadata["icon"], "chief-of-staff")
+        self.assertNotIn("role", metadata)
+        self.assertNotIn("teamAgents", metadata)
+        self.assertTrue(metadata["description"].strip())
+        self.assertTrue(metadata["roleReminder"].startswith("You are the built-in Assistant"))
+        self.assertTrue(body.startswith("<!-- Generated by scripts/build_pack.py"))
+        self.assertIn("## Assistant\n", body)
+
+    def test_intent_parser_view_uses_string_scalars(self):
+        metadata, _ = self.assistant()
+        parsed = intent_metadata(metadata)
+        self.assertEqual(parsed["hidden"], "true")
+        self.assertEqual(parsed["icon"], "chief-of-staff")
+        ada, _ = parse_generated((ROOT / "specialists/pa-ada.md").read_text(encoding="utf-8"))
+        self.assertEqual(intent_metadata(ada)["teamAgents"], ada["teamAgents"])
+
+    def test_assistant_is_an_app_helper_not_a_team_member(self):
+        _, _, charter = load_sources(self.root)
+        _, body = self.assistant()
+        self.assertNotIn(charter, body)
+        self.assertNotIn("Charter version:", body)
+        for identifier in EXPECTED_IDS:
+            ada, _ = parse_generated((ROOT / "specialists" / f"{identifier}.md").read_text(encoding="utf-8"))
+            self.assertNotIn(APP_ASSISTANT_ID, ada.get("teamAgents", []))
+        for identifier in EXPECTED_IDS:
+            self.assertIn(f"`{identifier}`", body)
+        for phrase in (
+            "not the personal assistant",
+            "Do not do personal errands yourself",
+            "Reuse it. An idle or finished Ada conversation is not a reason to start a new one",
+            "never tell the team something was approved unless the user approved that exact action",
+            "never propose them as a substitute",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, body)
+
+    def test_assistant_speaks_to_a_non_coding_audience(self):
+        _, body = self.assistant()
+        for phrase in (
+            "usually not software developers",
+            "Use plain language",
+            "Never ask the user to edit files, run commands or read code",
+            "Never ask for or accept passwords, sign-in codes, card numbers",
+            "information, not instructions",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, body)
+        self.assertNotIn("For repository work, find or propose", body)
+
+    def test_assistant_keeps_intent_app_contracts(self):
+        _, body = self.assistant()
+        for phrase in (
+            "ws.app.ui.targets()",
+            "ws.app.ui.navigate(route, { highlightId })",
+            "The card must be last",
+            "`preview.applyLabel`",
+            "ws.app.workspaces.list({ filter, sort })",
+            "`branch` is an existing base ref to branch FROM",
+            "```workspace\n{workspace-id}\n```",
+            "ws.note.create(title, content, tags?)",
+            "ws.app.agents.ask(agentId, message, priority?)",
+            "readConversation(target.workspaceId, target.agentId, { lastN: 20 })",
+            "[${conversation.workspaceTitle}](intent://local/${conversation.workspaceId}/agent/${conversation.agentId}/message/${finalAssistant.id})",
+            "ws.app.agents.waitFor({ agentIds, waitMode })",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, body)
+
+    def test_missing_or_renamed_assistant_is_rejected(self):
+        self.config(lambda c: c.pop("appAssistant"))
+        with self.assertRaisesRegex(ValueError, "chief-of-staff"):
+            render(self.root)
+        self.config(lambda c: c.update(appAssistant={**json.loads((ROOT / "source/pack.json").read_text())["appAssistant"], "id": "pa-assistant"}))
+        with self.assertRaisesRegex(ValueError, "chief-of-staff"):
+            render(self.root)
+
+    def test_visible_or_unknown_assistant_metadata_is_rejected(self):
+        for change in ({"hidden": False}, {"hidden": "true"}, {"role": "orchestrator"},
+                       {"teamAgents": ["pa-ada"]}, {"icon": ""}, {"roleReminder": " "}):
+            with self.subTest(change=change):
+                self.config(lambda c: c["appAssistant"].update(change))
+                with self.assertRaisesRegex(ValueError, "assistant"):
+                    render(self.root)
+                shutil.copy(ROOT / "source/pack.json", self.root / "source/pack.json")
+
+    def test_empty_or_missing_assistant_prompt_fails_build(self):
+        path = self.root / "source/assistant/chief-of-staff.md"
+        path.write_text(" \n")
+        with self.assertRaisesRegex(ValueError, "Empty app assistant"):
+            render(self.root)
+        path.unlink()
+        with self.assertRaises(FileNotFoundError):
+            render(self.root)
+
+    def test_stale_or_missing_assistant_artifact_is_rejected(self):
+        path = self.root / "source/assistant/chief-of-staff.md"
+        path.write_text(path.read_text() + "\nA changed instruction.\n")
+        with self.assertRaisesRegex(ValueError, "chief-of-staff.md"):
+            validate(self.root)
+        (self.root / "specialists/chief-of-staff.md").unlink()
+        with self.assertRaisesRegex(ValueError, "exactly"):
+            validate(self.root)
 
 
 if __name__ == "__main__":
