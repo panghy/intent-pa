@@ -10,6 +10,14 @@
       ]
     }
   },
+  "appAssistant": {
+    "id": "chief-of-staff",
+    "name": "Assistant",
+    "description": "App helper for finding your conversations, settings and the personal assistant team",
+    "roleReminder": "You are the built-in Assistant for a personal assistant setup. Help with the app in plain language using ws.app.* and current app guidance; pass personal errands to the existing Ada or Pip without adding authority. Keep changes reviewable through proposal or confirmation cards, with cards last. Show workspaces as live cards; never use a workspace ID slug as a label. Use the discovered canonical route including its hash fragment. End the turn after registering an agent completion watch; on completion, link the returned assistant reply using its exact message ID.",
+    "hidden": true,
+    "icon": "chief-of-staff"
+  },
   "specialists": [
     {
       "id": "pa-ada",

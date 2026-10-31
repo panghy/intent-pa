@@ -6,6 +6,13 @@ consult the ten domain specialists; each request has one reply owner.
 Start in your normal Intent conversation. An external channel such as WhatsApp is
 optional; Ada discovers its actual capabilities before using it.
 
+The pack also ships Intent's built-in **Assistant** (`chief-of-staff`), rewritten for
+people who do not write code. Intent's app-level Assistant chat always starts this
+specialist, and a replacement specialists directory removes Intent's own copy, so
+without it the Assistant cannot start. It stays hidden from the specialist picker,
+helps with the app in plain language and passes personal errands to your existing
+Ada or Pip instead of doing them itself.
+
 This repository contains **specialist instructions, offline reference examples and an
 opt-in actual-agent evaluation harness**.
 It does not install a messaging connector, authenticate accounts, receive webhooks,
@@ -26,6 +33,7 @@ exercise lifecycle decisions using fake transports, not live WhatsApp behavior.
 | Sentinel (`pa-sentinel`) | Follow-ups and monitoring |
 | Steward (`pa-steward`) | Operations and recovery |
 | Auditor (`pa-auditor`) | Independent verification |
+| Assistant (`chief-of-staff`, hidden) | Intent's app helper: finding conversations, settings and reaching Ada or Pip |
 
 ## Start here
 
@@ -47,15 +55,16 @@ exercise lifecycle decisions using fake transports, not live WhatsApp behavior.
    The team handles routine Git work; personal decisions remain yours. This pack
    does not provision the store or install automatic sync/backup.
 
-Each loaded specialist contains the shared charter. The roster does not start
-twelve agents, and instruction text is not a permission boundary. External actions
+Each loaded team specialist contains the shared charter; the app Assistant does not,
+because it is not a team member. The roster does not start twelve agents, and instruction text is not a permission boundary. External actions
 need the principal's current authority and runtime/tool enforcement.
 
 The replacement directory replaces Intent's base specialist bundle. User and
 project overrides still apply, and shared/workspace instructions are composed
 separately. See the installation guide before using this pack in an existing setup.
 
-To change prompts, edit `source/`, run `make build`, then `make check` and
+To change prompts, edit `source/` (team roles in `source/roles/`, the Assistant in
+`source/assistant/`), run `make build`, then `make check` and
 `make test`. Generated `specialists/` files are the installation artifacts.
 Run `make test-watchdog` for just the Node.js passive hook tests.
 

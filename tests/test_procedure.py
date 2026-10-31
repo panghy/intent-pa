@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_pack import BOOKING_ROLES, EXPECTED_IDS, load_procedures, parse_generated
+from build_pack import BOOKING_ROLES, EXPECTED_IDS, GENERATED_IDS, intent_metadata, load_procedures, parse_generated
 from check_intent_parser import fixture_source
 
 
@@ -32,7 +32,8 @@ class InstalledProcedureTests(unittest.TestCase):
         for path in sorted(self.installed.glob("*.md")):
             metadata, body = parse_generated(path.read_text(encoding="utf-8"))
             loaded[path.stem] = (metadata, body)
-        self.assertEqual(set(loaded), EXPECTED_IDS)
+        self.assertEqual(set(loaded), GENERATED_IDS)
+        self.assertIs(loaded["chief-of-staff"][0]["hidden"], True)
         self.assertEqual(set(loaded["pa-ada"][0]["teamAgents"]), EXPECTED_IDS - {"pa-ada", "pa-pip"})
         for identifier in BOOKING_ROLES:
             self.assertEqual(loaded[identifier][1].count(self.procedure), 1)
@@ -55,11 +56,11 @@ class InstalledProcedureTests(unittest.TestCase):
             text=True, capture_output=True, timeout=120, check=True,
         )
         loaded = json.loads(result.stdout)
-        self.assertEqual({item["id"] for item in loaded}, EXPECTED_IDS)
+        self.assertEqual({item["id"] for item in loaded}, GENERATED_IDS)
         for item in loaded:
             with self.subTest(identifier=item["id"]):
                 metadata, body = parse_generated((self.installed / f"{item['id']}.md").read_text())
-                self.assertEqual(item["metadata"], metadata)
+                self.assertEqual(item["metadata"], intent_metadata(metadata))
                 self.assertEqual(item["prompt"], body)
                 if item["id"] in BOOKING_ROLES:
                     self.assertEqual(item["prompt"].count(self.procedure), 1)
